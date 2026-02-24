@@ -1,11 +1,11 @@
 .home {
   background: linear-gradient(
     160deg,
-    #090000 0%,
+    #000000 0%,
     #120000 25%,
     #1b0000 50%,
     #120000 75%,
-    #090000 100%
+    #000000 100%
   );
   color: white;
   min-height: 100vh;
@@ -19,8 +19,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 30% 30%, rgba(15, 9, 8, 0.15), transparent 70%),
-    radial-gradient(circle at 70% 70%, rgba(14, 7, 6, 0.12), transparent 70%);
+    radial-gradient(circle at 30% 30%, rgba(12, 9, 8, 0.15), transparent 70%),
+    radial-gradient(circle at 70% 70%, rgba(12, 7, 6, 0.12), transparent 70%);
   z-index: 0;
   pointer-events: none;
   animation: furnaceFlow 20s linear infinite;
@@ -62,7 +62,7 @@
   left: 20%;
   width: 700px;
   height: 700px;
-  background: radial-gradient(circle, rgba(24, 12, 12, 0.4), transparent 70%);
+  background: radial-gradient(circle, rgba(32, 12, 12, 0.5), transparent 70%);
   filter: blur(200px);
   z-index: 1;
 }
@@ -261,24 +261,6 @@
   filter: blur(150px);
   z-index: 1;
 }
-
-/* FLOATING PARTICLES */
-.hero-particles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.hero-particle {
-  position: absolute;
-  bottom: -10px;
-  background: rgba(255, 80, 80, 0.8);
-  border-radius: 50%;
-  animation: floatHero linear infinite;
-  opacity: 0;
-}
-
 @keyframes floatHero {
   0% {
     transform: translateY(0);
