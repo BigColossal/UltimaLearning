@@ -1,0 +1,136 @@
+.domain-accordion {
+  border: 2px solid var(--border-color);
+  border-radius: 1.25rem;
+  margin-bottom: 1rem;
+  background: var(--card-bg);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.domain-accordion::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.domain-accordion:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.domain-accordion:hover::before {
+  opacity: 1;
+}
+
+.domain-accordion-header {
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.domain-accordion-header:hover {
+  background-color: var(--bg-secondary);
+}
+
+.domain-accordion-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 1.125rem;
+}
+
+.accordion-icon {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  transition: transform 0.3s ease;
+}
+
+.domain-accordion:hover .accordion-icon {
+  color: var(--primary-color);
+}
+
+.subskill-count {
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  background: var(--bg-secondary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+.domain-accordion-content {
+  padding: 0 2rem 1.5rem 2rem;
+  border-top: 1px solid var(--border-color);
+  position: relative;
+  z-index: 1;
+}
+
+.domain-description {
+  margin: 1.25rem 0;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.subskill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.subskill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background-color: var(--bg-secondary);
+  border-radius: 0.75rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1.5px solid transparent;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.subskill-item:hover {
+  background-color: var(--border-color);
+  border-color: var(--primary-color);
+  transform: translateX(6px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subskill-name {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.subskill-level {
+  font-size: 0.875rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.no-subskills {
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.9375rem;
+}

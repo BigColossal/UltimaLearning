@@ -1,0 +1,61 @@
+.hub {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+.hub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hub-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.hub-subtitle {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.create-skill-form {
+  margin-bottom: 1.5rem;
+}
+
+.create-skill-form h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.skill-card-wrapper {
+  position: relative;
+}
+
+.skill-card-actions-hub {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .hub-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .hub-header h1 {
+    font-size: 1.75rem;
+  }
+}

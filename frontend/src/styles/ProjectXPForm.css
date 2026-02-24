@@ -1,0 +1,59 @@
+.xp-form {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  border: 1px solid var(--border-color);
+  margin-top: 1.5rem;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.xp-form:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.xp-form-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.xp-quick-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.xp-custom-input {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.xp-custom-input .form-input {
+  flex: 1;
+}
+
+.xp-current {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.xp-current strong {
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .xp-quick-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .xp-custom-input {
+    flex-direction: column;
+  }
+}

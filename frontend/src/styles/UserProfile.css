@@ -1,0 +1,253 @@
+.user-profile {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+.profile-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.profile-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.profile-info {
+  color: var(--text-secondary);
+}
+
+.profile-info p {
+  margin-bottom: 0.5rem;
+}
+
+.profile-info strong {
+  color: var(--text-primary);
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  border: 2px solid var(--border-color);
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.stat-card:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .stat-card::after {
+    background: linear-gradient(135deg, rgba(229, 231, 235, 0.03), rgba(209, 213, 219, 0.03));
+  }
+}
+
+.stat-card h3 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.progress-section {
+  margin-top: 2rem;
+}
+
+.progress-section h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.subskills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+/* Tier border colors for subskill progress items */
+.subskill-progress-item.tier-bronze { border-left-color: #cd7f32; }
+.subskill-progress-item.tier-silver { border-left-color: #c0c0c0; }
+.subskill-progress-item.tier-gold { border-left-color: #ffd700; }
+.subskill-progress-item.tier-platinum { border-left-color: #e5e4e2; }
+.subskill-progress-item.tier-diamond { border-left-color: #b9f2ff; }
+.subskill-progress-item.tier-master { border-left-color: #8b5cf6; }
+.subskill-progress-item.tier-legend { border-left-color: #ff6b35; }
+.subskill-progress-item.tier-mythic { border-left-color: #ff006e; }
+.subskill-progress-item.tier-omniversal { border-left-color: #8338ec; }
+
+.subskill-progress-item {
+  display: block;
+  background: var(--card-bg);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  border: 2px solid var(--border-color);
+  border-left: 4px solid var(--border-color);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.subskill-progress-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.subskill-progress-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.subskill-progress-item:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+.subskill-progress-item:hover::before {
+  opacity: 1;
+}
+
+.subskill-progress-item:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .subskill-progress-item::after {
+    background: linear-gradient(135deg, rgba(229, 231, 235, 0.03), rgba(209, 213, 219, 0.03));
+  }
+}
+
+.subskill-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.subskill-progress-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.subskill-path {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.subskill-progress-bar {
+  margin-top: 0.75rem;
+}
+
+.xp-info-small {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.xp-info-small span:first-child {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.xp-info-small span:last-child {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .profile-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .subskill-progress-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
