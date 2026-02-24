@@ -35,6 +35,12 @@ const Home = () => {
           </div>
         </div>
 
+        <img
+          src="mountain.png"
+          alt="volcano silhouette"
+          className="hero-mountain"
+        />
+
         {/* Subtle Ember Glow */}
         <div className="hero-glow" />
       </section>

@@ -1,0 +1,24 @@
+{
+  "name": "ultimalearning",
+  "version": "1.0.0",
+  "description": "A full-featured MERN stack web application for creating and following structured learning roadmaps with gamified XP and level tracking.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BigColossal/UltimaLearning.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BigColossal/UltimaLearning/issues"
+  },
+  "homepage": "https://github.com/BigColossal/UltimaLearning#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

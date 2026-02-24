@@ -73,8 +73,8 @@ const Navbar = () => {
 
       <div className="navbar-container">
         <Link to="/" className="navbar-brand">
-          <span className="brand-icon">⚡</span>
-          UltimaLearning
+          <span className="brand-icon">🔥</span>
+          Volcanicus
         </Link>
 
         <div className="navbar-links">
