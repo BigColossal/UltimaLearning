@@ -1,12 +1,11 @@
-/* HOME BASE - FURNACE VIBE */
 .home {
   background: linear-gradient(
     160deg,
-    #100000 0%,
-    #200000 25%,
-    #330000 50%,
-    #200000 75%,
-    #100000 100%
+    #090000 0%,
+    #120000 25%,
+    #1b0000 50%,
+    #120000 75%,
+    #090000 100%
   );
   color: white;
   min-height: 100vh;
@@ -14,7 +13,7 @@
   position: relative;
 }
 
-/* EMBER LAYER */
+/* EMBER LAYER + FURNACE FLOW */
 .home::before {
   content: "";
   position: absolute;
@@ -24,9 +23,9 @@
     radial-gradient(circle at 70% 70%, rgba(14, 7, 6, 0.12), transparent 70%);
   z-index: 0;
   pointer-events: none;
+  animation: furnaceFlow 20s linear infinite;
 }
 
-/* SUBTLE MOVING FURNACE FLOW */
 @keyframes furnaceFlow {
   0% {
     background-position:
@@ -43,10 +42,6 @@
       0% 0%,
       100% 100%;
   }
-}
-
-.home::before {
-  animation: furnaceFlow 20s linear infinite;
 }
 
 /* HERO FULLSCREEN */
@@ -70,37 +65,6 @@
   background: radial-gradient(circle, rgba(24, 12, 12, 0.4), transparent 70%);
   filter: blur(200px);
   z-index: 1;
-}
-
-/* LAVA FLOW FROM TOP */
-.home::after {
-  content: "";
-  position: absolute;
-  top: -50%; /* start above hero */
-  left: 0;
-  width: 100%;
-  height: 200%; /* cover area to animate down */
-  background: linear-gradient(
-    180deg,
-    rgba(65, 23, 13, 0.6) 0%,
-    rgba(43, 13, 13, 0.5) 20%,
-    rgba(104, 12, 12, 0.4) 50%,
-    rgba(79, 8, 8, 0.6) 100%
-  );
-  filter: blur(60px) contrast(1.2);
-  opacity: 0.3;
-  z-index: 0;
-  pointer-events: none;
-  animation: lavaFlow 8s linear infinite;
-}
-
-@keyframes lavaFlow {
-  0% {
-    transform: translateY(-50%);
-  }
-  100% {
-    transform: translateY(0%);
-  }
 }
 
 /* HERO TEXT LEFT */
@@ -140,21 +104,40 @@
   }
 }
 
+/* HERO SUBTITLE - MORE CINEMATIC */
 .hero-subtitle {
   margin-top: 1.5rem;
-  font-size: 1.25rem;
-  color: var(--text-secondary);
+  font-size: 1.5rem; /* slightly larger for readability */
+  line-height: 1.8; /* airy and easier on the eyes */
+  font-weight: 500; /* medium weight, not too heavy */
+  color: rgba(255, 200, 180, 0.85); /* warm ember glow tone */
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.6),
+    0 0 5px rgba(255, 80, 80, 0.3); /* subtle glowing edges */
+  letter-spacing: 0.5px; /* gentle tracking for elegance */
+  max-width: 550px; /* better line length for readability */
 }
 
+/* WELCOME BACK TEXT - HIGHLIGHT USERNAME */
 .hero-welcome {
   margin-top: 1rem;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+  color: rgba(255, 150, 150, 0.85); /* slightly more vibrant */
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-shadow: 0 0 6px rgba(255, 80, 80, 0.4);
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .hero-welcome span {
-  color: var(--primary-color);
-  font-weight: 600;
+  /* color: var(--primary-color); */
+  color: rgb(222, 169, 24);
+  font-weight: 700;
+  text-shadow:
+    0 0 8px rgba(21, 9, 9, 1),
+    0 0 12px rgba(21, 9, 9, 1);
 }
 
 .hero-actions {

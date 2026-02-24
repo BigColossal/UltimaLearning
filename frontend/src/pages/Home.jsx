@@ -58,7 +58,7 @@ const Home = () => {
 
           <div className="hero-actions">
             <Link to="/hub" className="btn-primary">
-              Enter Hub →
+              Enter Hub
             </Link>
           </div>
         </div>

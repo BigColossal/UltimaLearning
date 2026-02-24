@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useUser } from '../context/UserContext';
-import { getSkills, createSkill, deleteSkill, getSkillById } from '../api/api';
-import SkillCard from '../components/SkillCard';
-import '../styles/Hub.css';
+import { useState, useEffect } from "react";
+import { useUser } from "../context/UserContext";
+import { getSkills, createSkill, deleteSkill, getSkillById } from "../api/api";
+import SkillCard from "../components/SkillCard";
+import "../styles/Hub.css";
 
 const Hub = () => {
   const { skills, refreshSkills } = useUser();
   const [skillsWithDomains, setSkillsWithDomains] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [formData, setFormData] = useState({ name: '', description: '' });
+  const [formData, setFormData] = useState({ name: "", description: "" });
 
   useEffect(() => {
     loadSkills();
@@ -19,10 +19,10 @@ const Hub = () => {
     try {
       setLoading(true);
       await refreshSkills();
-      
+
       // Get updated skills from context
-      const updatedSkills = await getSkills('default');
-      
+      const updatedSkills = await getSkills("Jeremy");
+
       // Load domains and subskills for each skill
       const skillsData = await Promise.all(
         updatedSkills.data.map(async (skill) => {
@@ -33,12 +33,12 @@ const Hub = () => {
             console.error(`Error loading skill ${skill._id}:`, error);
             return { ...skill, domains: [] };
           }
-        })
+        }),
       );
-      
+
       setSkillsWithDomains(skillsData);
     } catch (error) {
-      console.error('Error loading skills:', error);
+      console.error("Error loading skills:", error);
     } finally {
       setLoading(false);
     }
@@ -50,25 +50,29 @@ const Hub = () => {
       await createSkill({
         name: formData.name,
         description: formData.description,
-        userId: 'default',
+        userId: "Jeremy",
       });
-      setFormData({ name: '', description: '' });
+      setFormData({ name: "", description: "" });
       setShowCreateForm(false);
       await loadSkills();
     } catch (error) {
-      console.error('Error creating skill:', error);
-      alert('Failed to create skill. Please try again.');
+      console.error("Error creating skill:", error);
+      alert("Failed to create skill. Please try again.");
     }
   };
 
   const handleDeleteSkill = async (skillId) => {
-    if (window.confirm('Are you sure you want to delete this skill? This will delete all domains and subskills.')) {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this skill? This will delete all domains and subskills.",
+      )
+    ) {
       try {
         await deleteSkill(skillId);
         await loadSkills();
       } catch (error) {
-        console.error('Error deleting skill:', error);
-        alert('Failed to delete skill. Please try again.');
+        console.error("Error deleting skill:", error);
+        alert("Failed to delete skill. Please try again.");
       }
     }
   };
@@ -78,11 +82,11 @@ const Hub = () => {
       <div className="hub-header">
         <h1>Learning Hub</h1>
         <p className="hub-subtitle">Manage your learning skills and roadmaps</p>
-        <button 
+        <button
           className="btn btn-primary"
           onClick={() => setShowCreateForm(!showCreateForm)}
         >
-          {showCreateForm ? 'Cancel' : '+ Create New Skill'}
+          {showCreateForm ? "Cancel" : "+ Create New Skill"}
         </button>
       </div>
 
@@ -96,7 +100,9 @@ const Hub = () => {
                 type="text"
                 className="form-input"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 required
                 placeholder="e.g., Web Development"
               />
@@ -106,7 +112,9 @@ const Hub = () => {
               <textarea
                 className="form-input form-textarea"
                 value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
                 placeholder="Describe what this skill encompasses..."
               />
             </div>
