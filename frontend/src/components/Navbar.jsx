@@ -53,7 +53,7 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
-      <div className="navbar-particles">
+      {/* <div className="navbar-particles">
         {particles.map((p) => (
           <span
             key={p.id}
@@ -67,7 +67,7 @@ const Navbar = () => {
             }}
           />
         ))}
-      </div>
+      </div> */}
 
       <div className="navbar-glow" />
 

@@ -47,7 +47,7 @@
   }
 
   100% {
-    transform: translateY(-120px);
+    transform: translateY(-4000%);
     opacity: 0;
   }
 }
@@ -90,7 +90,8 @@
 /* ================= BRAND ================= */
 
 .navbar-brand {
-  font-size: 1.6rem;
+  font-family: "Cinzel", serif; /* or Forum, or Caudex */
+  font-size: 2rem;
   font-weight: 800;
   letter-spacing: -0.5px;
   background: linear-gradient(

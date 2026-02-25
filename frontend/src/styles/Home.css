@@ -6,11 +6,11 @@
 
   background: linear-gradient(
     160deg,
-    #000000 0%,
+    #050000 0%,
     #120000 25%,
     #1b0000 50%,
     #120000 75%,
-    #000000 100%
+    #050000 100%
   );
 }
 
@@ -25,8 +25,8 @@
   z-index: 0;
 
   background:
-    radial-gradient(circle at 30% 30%, rgba(12, 9, 8, 0.15), transparent 70%),
-    radial-gradient(circle at 70% 70%, rgba(12, 7, 6, 0.12), transparent 70%);
+    radial-gradient(circle at 30% 30%, rgba(20, 9, 8, 0.15), transparent 70%),
+    radial-gradient(circle at 70% 70%, rgba(20, 7, 6, 0.12), transparent 70%);
 
   animation: furnaceFlow 20s linear infinite;
 }
@@ -55,11 +55,12 @@
 .hero-mountain {
   position: absolute;
   right: 0;
-  bottom: -250px;
+  bottom: -30%;
   width: 75%;
   pointer-events: none;
 
-  filter: brightness(0) drop-shadow(0 0 40px rgba(255, 50, 50, 0.1));
+  /* filter: brightness(0) drop-shadow(0 0 40px rgba(255, 50, 50, 0.5)); */
+  filter: brightness(0) drop-shadow(0 0 40px rgba(251, 130, 130, 0.5));
   opacity: 0.8;
 
   z-index: 1;
@@ -75,11 +76,30 @@
   width: 700px;
   height: 700px;
 
-  background: radial-gradient(circle, rgba(180, 50, 50, 0.35), transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(222, 117, 117, 0.7),
+    transparent 70%
+  );
   filter: blur(150px);
 
   pointer-events: none;
   z-index: 2;
+
+  /* Smooth color cycling */
+  animation: glowHue 4s linear infinite;
+}
+
+@keyframes glowHue {
+  0% {
+    filter: blur(150px) hue-rotate(0deg);
+  }
+  50% {
+    filter: blur(150px) hue-rotate(30deg);
+  }
+  100% {
+    filter: blur(150px) hue-rotate(10deg);
+  }
 }
 
 /* =========================
@@ -94,6 +114,8 @@
   padding: 0 4rem;
 
   z-index: 3;
+
+  overflow: hidden; /* <-- ADD THIS */
 }
 
 .hero-container.hero-left-align {
@@ -149,27 +171,6 @@
   text-shadow:
     0 1px 2px rgba(0, 0, 0, 0.6),
     0 0 5px rgba(255, 80, 80, 0.3);
-}
-
-/* Welcome */
-.hero-welcome {
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-
-  color: rgba(255, 150, 150, 0.85);
-  text-shadow: 0 0 6px rgba(255, 80, 80, 0.4);
-
-  transition: 0.3s ease;
-}
-
-.hero-welcome span {
-  color: rgb(222, 169, 24);
-  font-weight: 700;
-  text-shadow:
-    0 0 8px rgba(21, 9, 9, 1),
-    0 0 12px rgba(21, 9, 9, 1);
 }
 
 /* =========================
@@ -232,4 +233,246 @@
 .btn-secondary:hover {
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 0 30px rgba(255, 80, 80, 0.5);
+}
+
+/* Particles */
+.home-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.home-particle {
+  position: absolute;
+  bottom: -10px;
+  background: rgba(200, 60, 60, 0.8);
+  border-radius: 50%;
+  animation: floatUp-home linear infinite;
+  opacity: 0;
+}
+
+@keyframes floatUp-home {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-20000%);
+    opacity: 0;
+  }
+}
+
+/* =====================================================
+   GLOBAL SECTION STRUCTURE
+===================================================== */
+
+.section {
+  position: relative;
+  padding: 8rem 4rem;
+  z-index: 3;
+}
+
+.section-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  text-align: center;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 120, 120, 1),
+    rgba(255, 60, 60, 0.9)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-text {
+  font-size: 1.2rem;
+  line-height: 1.9;
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto;
+  color: rgba(255, 210, 190, 0.85);
+}
+
+/* =====================================================
+   PROBLEM / SOLUTION
+===================================================== */
+
+.problem-section {
+  background: rgba(255, 30, 30, 0.03);
+  border-top: 1px solid rgba(255, 60, 60, 0.08);
+  border-bottom: 1px solid rgba(255, 60, 60, 0.08);
+}
+
+.solution-section {
+  background: rgba(255, 80, 80, 0.02);
+}
+
+/* =====================================================
+   FEATURES
+===================================================== */
+
+.features-grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2.5rem;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 80, 80, 0.15);
+  border-radius: 1.5rem;
+  padding: 2rem;
+
+  backdrop-filter: blur(10px);
+
+  transition: 0.4s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 80, 80, 0.4);
+  box-shadow: 0 0 35px rgba(255, 60, 60, 0.2);
+}
+
+.feature-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: rgba(255, 160, 140, 0.95);
+}
+
+.feature-card p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 210, 190, 0.8);
+}
+
+/* =====================================================
+   HOW IT WORKS
+===================================================== */
+
+.steps {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1.1rem;
+  color: rgba(255, 210, 190, 0.9);
+}
+
+.step-number {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff5f5f, #ff2a2a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(255, 60, 60, 0.5);
+}
+
+/* =====================================================
+   GAMIFIED SECTION
+===================================================== */
+
+.gamified-section {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 70, 70, 0.06),
+    transparent 70%
+  );
+}
+
+/* =====================================================
+   FAQ
+===================================================== */
+
+.faq-section {
+  border-top: 1px solid rgba(255, 60, 60, 0.08);
+}
+
+.faq-item {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 80, 80, 0.1);
+  transition: 0.3s ease;
+}
+
+.faq-item:hover {
+  border-color: rgba(255, 80, 80, 0.4);
+  box-shadow: 0 0 25px rgba(255, 60, 60, 0.15);
+}
+
+.faq-item h4 {
+  margin-bottom: 0.7rem;
+  font-size: 1.1rem;
+  color: rgba(255, 160, 140, 0.95);
+}
+
+.faq-item p {
+  color: rgba(255, 210, 190, 0.8);
+  line-height: 1.6;
+}
+
+/* =====================================================
+   FINAL CTA
+===================================================== */
+
+.final-cta {
+  text-align: center;
+  padding-bottom: 10rem;
+}
+
+.final-cta .large {
+  margin-top: 2rem;
+  padding: 1.2rem 3.5rem;
+  font-size: 1.2rem;
+}
+
+.center {
+  text-align: center;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+  .section {
+    padding: 6rem 2rem;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+
+  .features-grid {
+    gap: 1.5rem;
+  }
 }
