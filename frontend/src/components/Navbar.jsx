@@ -1,11 +1,16 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef, useMemo } from "react";
+import { useAuth } from "../context/AuthContext";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const linksRef = useRef([]);
+  const dropdownRef = useRef(null);
+  const { isAuthenticated, user, logout } = useAuth();
 
   // Generate particles once (not on every render)
   const particles = useMemo(() => {
@@ -27,6 +32,21 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    if (showDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [showDropdown]);
+
   // Magnetic hover
   const handleMouseMove = (e, index) => {
     const el = linksRef.current[index];
@@ -45,11 +65,18 @@ const Navbar = () => {
     el.style.transform = "translate(0px, 0px)";
   };
 
-  const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/hub", label: "Hub" },
-    { path: "/profile", label: "Profile" },
-  ];
+  const handleLogout = () => {
+    logout();
+    setShowDropdown(false);
+    navigate("/");
+  };
+
+  const navLinks = [{ path: "/", label: "Home" }];
+
+  // Only show hub and profile if authenticated
+  if (isAuthenticated) {
+    navLinks.push({ path: "/learning-hub", label: "Learning Hub" });
+  }
 
   return (
     <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
@@ -92,6 +119,53 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
+        </div>
+
+        <div className="navbar-right">
+          {isAuthenticated ? (
+            <div className="user-dropdown" ref={dropdownRef}>
+              <button
+                className="user-button"
+                onClick={() => setShowDropdown(!showDropdown)}
+              >
+                <span className="user-avatar">
+                  {user?.profileImage ? (
+                    <img src={user.profileImage} alt={user.name} />
+                  ) : (
+                    <span>{user?.name?.charAt(0) || "U"}</span>
+                  )}
+                </span>
+                <span className="user-name">{user?.name || "User"}</span>
+              </button>
+
+              {showDropdown && (
+                <div className="dropdown-menu">
+                  <div className="dropdown-header">
+                    <p className="dropdown-email">{user?.email}</p>
+                  </div>
+                  <Link
+                    to="/profile"
+                    className="dropdown-item"
+                    onClick={() => setShowDropdown(false)}
+                  >
+                    📋 Profile
+                  </Link>
+                  <button
+                    className="dropdown-item logout-btn"
+                    onClick={handleLogout}
+                  >
+                    🚪 Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="auth-buttons">
+              <Link to="/login" className="btn-login">
+                Sign In
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

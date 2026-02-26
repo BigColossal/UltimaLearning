@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { getUser, getSkills } from "../api/api";
+import { getUser } from "../api/api";
 
 const UserContext = createContext();
 
@@ -25,9 +25,6 @@ export const UserProvider = ({ children }) => {
       setLoading(true);
       const userResponse = await getUser();
       setUser(userResponse.data);
-
-      const skillsResponse = await getSkills(userResponse.data.username);
-      setSkills(skillsResponse.data);
     } catch (error) {
       console.error("Error loading user data:", error);
     } finally {
@@ -35,20 +32,10 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const refreshSkills = async () => {
-    try {
-      const response = await getSkills(user?.username || "Jeremy");
-      setSkills(response.data);
-    } catch (error) {
-      console.error("Error refreshing skills:", error);
-    }
-  };
-
   const value = {
     user,
     skills,
     loading,
-    refreshSkills,
     setSkills,
   };
 
