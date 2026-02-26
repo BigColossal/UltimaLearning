@@ -158,17 +158,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ================= GAMIFICATION ================= */}
-      <section className="section gamified-section">
-        <div className="section-container">
-          <h2 className="section-title">Learning, Gamified.</h2>
-          <p className="section-text">
-            Earn XP. Unlock levels. Track streaks. Turn deliberate practice into
-            a progression system.
-          </p>
-        </div>
-      </section>
-
       {/* ================= FAQ ================= */}
       <section className="section faq-section">
         <div className="section-container">
