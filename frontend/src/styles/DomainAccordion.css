@@ -1,46 +1,82 @@
+/* =======================================================
+   DOMAIN ACCORDION ROOT
+======================================================= */
+
 .domain-accordion {
-  border: 2px solid var(--border-color);
-  border-radius: 1.25rem;
-  margin-bottom: 1rem;
-  background: var(--card-bg);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  backdrop-filter: blur(10px);
   position: relative;
+  overflow: hidden;
+
+  margin-bottom: 1rem;
+  border-radius: 1.25rem;
+  border: 2px solid var(--border-color);
+  background: var(--card-bg);
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
+/* Top gradient accent bar */
 .domain-accordion::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
+/* Hover State */
 .domain-accordion:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
-  border-color: var(--primary-color);
   transform: translateY(-2px);
+  border-color: var(--primary-color);
+
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.15),
+    0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
 
 .domain-accordion:hover::before {
   opacity: 1;
 }
 
+/* Open State */
+.domain-accordion.open {
+  border-color: var(--primary-color);
+
+  box-shadow:
+    0 15px 30px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(241, 99, 99, 0.1);
+}
+
+/* =======================================================
+   HEADER
+======================================================= */
+
 .domain-accordion-header {
+  position: relative;
+  z-index: 1;
+
   padding: 1.5rem 2rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  z-index: 1;
+  transition: background-color 0.25s ease;
 }
 
 .domain-accordion-header:hover {
@@ -51,43 +87,83 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  font-size: 1.125rem;
   font-weight: 700;
   color: var(--text-primary);
-  font-size: 1.125rem;
 }
 
-.accordion-icon {
-  color: var(--text-secondary);
+.subskill-count {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+
   font-size: 0.875rem;
-  transition: transform 0.3s ease;
+  font-weight: 500;
+
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+}
+
+/* =======================================================
+   ICON
+======================================================= */
+
+.accordion-icon {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.accordion-icon.open {
+  transform: rotate(90deg);
 }
 
 .domain-accordion:hover .accordion-icon {
   color: var(--primary-color);
 }
 
-.subskill-count {
-  font-weight: 500;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  background: var(--bg-secondary);
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-}
+/* =======================================================
+   CONTENT WRAPPER (Smooth Expand)
+======================================================= */
 
 .domain-accordion-content {
-  padding: 0 2rem 1.5rem 2rem;
+  max-height: 0;
+  overflow: hidden;
+
+  padding: 0 2rem;
   border-top: 1px solid var(--border-color);
-  position: relative;
-  z-index: 1;
+
+  opacity: 0;
+  transform: translateY(-10px);
+
+  transition:
+    max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    padding 0.3s ease;
 }
+
+.domain-accordion-content.open {
+  max-height: 800px; /* Must exceed content height */
+  padding: 1.5rem 2rem;
+
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =======================================================
+   CONTENT TEXT
+======================================================= */
 
 .domain-description {
   margin: 1.25rem 0;
-  color: var(--text-secondary);
+
   font-size: 0.9375rem;
   line-height: 1.6;
+  color: var(--text-secondary);
 }
+
+/* =======================================================
+   SUBSKILL LIST
+======================================================= */
 
 .subskill-list {
   display: flex;
@@ -95,42 +171,89 @@
   gap: 0.75rem;
 }
 
+/* IMPORTANT FIX:
+   Subskills start hidden by default
+   No flicker on open */
 .subskill-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 1rem 1.25rem;
-  background-color: var(--bg-secondary);
   border-radius: 0.75rem;
+
   text-decoration: none;
   color: var(--text-primary);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  background-color: var(--bg-secondary);
   border: 1.5px solid transparent;
+
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  opacity: 0;
+  transform: translateX(-8px);
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.3s ease;
 }
 
+/* Reveal ONLY when accordion is open */
+.domain-accordion-content.open .subskill-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Staggered delay */
+.domain-accordion-content.open .subskill-item:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.domain-accordion-content.open .subskill-item:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.domain-accordion-content.open .subskill-item:nth-child(3) {
+  transition-delay: 0.15s;
+}
+.domain-accordion-content.open .subskill-item:nth-child(4) {
+  transition-delay: 0.2s;
+}
+.domain-accordion-content.open .subskill-item:nth-child(5) {
+  transition-delay: 0.25s;
+}
+
+/* Hover interaction */
 .subskill-item:hover {
   background-color: var(--border-color);
   border-color: var(--primary-color);
+
   transform: translateX(6px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .subskill-name {
-  font-weight: 600;
   font-size: 0.9375rem;
+  font-weight: 600;
 }
 
 .subskill-level {
   font-size: 0.875rem;
-  color: var(--primary-color);
   font-weight: 700;
+  color: var(--primary-color);
 }
 
+/* =======================================================
+   EMPTY STATE
+======================================================= */
+
 .no-subskills {
-  color: var(--text-secondary);
-  font-style: italic;
   padding: 1.5rem;
-  text-align: center;
+
   font-size: 0.9375rem;
+  font-style: italic;
+  text-align: center;
+
+  color: var(--text-secondary);
 }

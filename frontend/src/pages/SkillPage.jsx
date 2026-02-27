@@ -95,6 +95,11 @@ const SkillPage = () => {
   return (
     <div className="skill-page">
       <div className="skill-page-header">
+        <div className="back-button-wrapper">
+          <button className="btn btn-danger" onClick={() => navigate("/hub")}>
+            Back to Hub
+          </button>
+        </div>
         {editing ? (
           <form onSubmit={handleUpdateSkill} className="skill-edit-form">
             <input
