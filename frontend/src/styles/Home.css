@@ -61,7 +61,7 @@
 
   /* filter: brightness(0) drop-shadow(0 0 40px rgba(255, 50, 50, 0.5)); */
   filter: brightness(0) drop-shadow(0 0 40px rgba(251, 130, 130, 0.5));
-  opacity: 0.8;
+  opacity: 1;
 
   z-index: 1;
 }
@@ -309,13 +309,217 @@
 }
 
 /* =====================================================
-   PROBLEM / SOLUTION
+   PROBLEM SECTION — RUINS ON MOUNTAIN
 ===================================================== */
 
 .problem-section {
-  background: rgba(255, 30, 30, 0.03);
-  border-top: 1px solid rgba(255, 60, 60, 0.08);
-  border-bottom: 1px solid rgba(255, 60, 60, 0.08);
+  position: relative;
+  overflow: hidden;
+  padding: 10rem 4rem;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 10, 10, 0.9) 0%,
+    rgba(50, 26, 26, 0.95) 100%
+  );
+  height: 750px;
+}
+
+/* Mountain Base */
+.problem-section::before {
+  content: "";
+  position: absolute;
+  bottom: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  height: 60%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 1) 60%
+    ),
+    linear-gradient(to top, rgba(0, 0, 0, 1), transparent 80%);
+
+  clip-path: polygon(
+    0% 100%,
+    15% 70%,
+    30% 75%,
+    45% 55%,
+    60% 65%,
+    75% 50%,
+    90% 70%,
+    100% 100%
+  );
+
+  z-index: 3;
+  opacity: 0.95;
+}
+
+/* Ruins container */
+/* Ruins container becomes a positioning canvas */
+.ruins-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 500px; /* controls vertical play area */
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* LEFT RUIN */
+.ruin-1 {
+  bottom: 10%;
+  left: 5%;
+  width: 480px;
+  height: 620px;
+}
+
+/* CENTER RUIN */
+.ruin-2 {
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 550px;
+  height: 750px;
+}
+
+/* RIGHT RUIN */
+.ruin-3 {
+  bottom: 25%;
+  right: 7%;
+  width: 330px;
+  height: 460px;
+}
+
+.ruin-4 {
+  bottom: 25%;
+  right: 27%;
+  width: 400px;
+  height: 300px;
+  z-index: -1;
+  opacity: 1;
+}
+
+.ruins {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+
+  filter: brightness(0) drop-shadow(0 0 20px rgba(169, 36, 36, 0.3));
+}
+
+/* Subtle red underglow behind ruins */
+.problem-section .section-container::before {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 400px;
+
+  background: radial-gradient(circle, rgba(255, 40, 40, 0.15), transparent 70%);
+
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =========================================
+   ASH PARTICLES
+========================================= */
+
+.problem-section .ash-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ash {
+  position: absolute;
+  left: -20px; /* start off-screen left */
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 120, 120, 0.6);
+  border-radius: 50%;
+  opacity: 0;
+
+  animation: ashFloat linear infinite;
+}
+
+@keyframes ashFloat {
+  0% {
+    transform: translateX(0) translateY(0) scale(1);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateX(55vw) translateY(calc(var(--driftY) * 0.5))
+      rotate(180deg) scale(var(--scale));
+  }
+
+  100% {
+    transform: translateX(110vw) translateY(var(--driftY))
+      scale(calc(var(--scale) * 0.6));
+    opacity: 0;
+  }
+}
+
+/* TEXT OVERLAY */
+.problem-section .section-container {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+}
+
+/* Make title feel heavier and dramatic */
+.problem-section .section-title {
+  font-size: 3rem;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 25px rgba(255, 60, 60, 0.4),
+    0 4px 15px rgba(0, 0, 0, 0.8);
+}
+
+/* Enhance paragraph contrast */
+.problem-section .section-text {
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+  color: rgba(255, 200, 180, 0.9);
+
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* =========================================
+   TOP DIVIDER (Hero -> Problem)
+========================================= */
+
+.problem-section .top-divider {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  pointer-events: none;
+  z-index: 4;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.4) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 .solution-section {

@@ -1,8 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { getSkillById, updateSkill, deleteSkill, createDomain } from '../api/api';
-import DomainAccordion from '../components/DomainAccordion';
-import '../styles/SkillPage.css';
+import { useState, useEffect } from "react";
+import { useParams, useNavigate, Router } from "react-router-dom";
+import {
+  getSkillById,
+  updateSkill,
+  deleteSkill,
+  createDomain,
+} from "../api/api";
+import DomainAccordion from "../components/DomainAccordion";
+import ConfirmModal from "../components/confirmModal";
+import "../styles/SkillPage.css";
 
 const SkillPage = () => {
   const { id } = useParams();
@@ -10,9 +16,13 @@ const SkillPage = () => {
   const [skill, setSkill] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
-  const [formData, setFormData] = useState({ name: '', description: '' });
+  const [formData, setFormData] = useState({ name: "", description: "" });
   const [showDomainForm, setShowDomainForm] = useState(false);
-  const [domainFormData, setDomainFormData] = useState({ name: '', description: '' });
+  const [domainFormData, setDomainFormData] = useState({
+    name: "",
+    description: "",
+  });
+  const [deleteTarget, setDeleteTarget] = useState(null);
 
   useEffect(() => {
     loadSkill();
@@ -25,10 +35,10 @@ const SkillPage = () => {
       setSkill(response.data);
       setFormData({
         name: response.data.name,
-        description: response.data.description || '',
+        description: response.data.description || "",
       });
     } catch (error) {
-      console.error('Error loading skill:', error);
+      console.error("Error loading skill:", error);
     } finally {
       setLoading(false);
     }
@@ -41,20 +51,23 @@ const SkillPage = () => {
       setSkill(response.data);
       setEditing(false);
     } catch (error) {
-      console.error('Error updating skill:', error);
-      alert('Failed to update skill. Please try again.');
+      console.error("Error updating skill:", error);
+      alert("Failed to update skill. Please try again.");
     }
   };
 
-  const handleDeleteSkill = async () => {
-    if (window.confirm('Are you sure you want to delete this skill? This will delete all domains and subskills.')) {
-      try {
-        await deleteSkill(id);
-        navigate('/hub');
-      } catch (error) {
-        console.error('Error deleting skill:', error);
-        alert('Failed to delete skill. Please try again.');
-      }
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+
+    try {
+      await deleteSkill(deleteTarget);
+
+      setDeleteTarget(null);
+
+      // Redirect back to hub after deletion
+      navigate("/hub");
+    } catch (error) {
+      console.error("Error deleting skill:", error);
     }
   };
 
@@ -62,12 +75,12 @@ const SkillPage = () => {
     e.preventDefault();
     try {
       await createDomain(id, domainFormData);
-      setDomainFormData({ name: '', description: '' });
+      setDomainFormData({ name: "", description: "" });
       setShowDomainForm(false);
       await loadSkill();
     } catch (error) {
-      console.error('Error creating domain:', error);
-      alert('Failed to create domain. Please try again.');
+      console.error("Error creating domain:", error);
+      alert("Failed to create domain. Please try again.");
     }
   };
 
@@ -88,18 +101,24 @@ const SkillPage = () => {
               type="text"
               className="form-input"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               required
             />
             <textarea
               className="form-input form-textarea"
               value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
             />
             <div className="form-actions">
-              <button type="submit" className="btn btn-primary">Save</button>
-              <button 
-                type="button" 
+              <button type="submit" className="btn btn-primary">
+                Save
+              </button>
+              <button
+                type="button"
                 className="btn btn-secondary"
                 onClick={() => setEditing(false)}
               >
@@ -111,18 +130,20 @@ const SkillPage = () => {
           <>
             <div>
               <h1>{skill.name}</h1>
-              <p className="skill-description">{skill.description || 'No description'}</p>
+              <p className="skill-description">
+                {skill.description || "No description"}
+              </p>
             </div>
             <div className="skill-actions">
-              <button 
+              <button
                 className="btn btn-secondary"
                 onClick={() => setEditing(true)}
               >
                 Edit
               </button>
-              <button 
+              <button
                 className="btn btn-danger"
-                onClick={handleDeleteSkill}
+                onClick={() => setDeleteTarget(id)}
               >
                 Delete
               </button>
@@ -134,11 +155,11 @@ const SkillPage = () => {
       <div className="domains-section">
         <div className="domains-header">
           <h2>Domains ({skill.domains?.length || 0})</h2>
-          <button 
+          <button
             className="btn btn-primary"
             onClick={() => setShowDomainForm(!showDomainForm)}
           >
-            {showDomainForm ? 'Cancel' : '+ Add Domain'}
+            {showDomainForm ? "Cancel" : "+ Add Domain"}
           </button>
         </div>
 
@@ -152,7 +173,12 @@ const SkillPage = () => {
                   type="text"
                   className="form-input"
                   value={domainFormData.name}
-                  onChange={(e) => setDomainFormData({ ...domainFormData, name: e.target.value })}
+                  onChange={(e) =>
+                    setDomainFormData({
+                      ...domainFormData,
+                      name: e.target.value,
+                    })
+                  }
                   required
                   placeholder="e.g., Frontend Development"
                 />
@@ -162,7 +188,12 @@ const SkillPage = () => {
                 <textarea
                   className="form-input form-textarea"
                   value={domainFormData.description}
-                  onChange={(e) => setDomainFormData({ ...domainFormData, description: e.target.value })}
+                  onChange={(e) =>
+                    setDomainFormData({
+                      ...domainFormData,
+                      description: e.target.value,
+                    })
+                  }
                   placeholder="Describe this domain..."
                 />
               </div>
@@ -176,9 +207,9 @@ const SkillPage = () => {
         {skill.domains && skill.domains.length > 0 ? (
           <div className="domains-list">
             {skill.domains.map((domain) => (
-              <DomainAccordion 
-                key={domain._id} 
-                domain={domain} 
+              <DomainAccordion
+                key={domain._id}
+                domain={domain}
                 subskills={domain.subskills || []}
               />
             ))}
@@ -189,6 +220,16 @@ const SkillPage = () => {
           </div>
         )}
       </div>
+      <ConfirmModal
+        isOpen={!!deleteTarget}
+        title="Delete Skill?"
+        message="This will permanently delete this skill, including all domains and subskills. This cannot be undone."
+        confirmText="Delete"
+        cancelText="Cancel"
+        danger
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 };

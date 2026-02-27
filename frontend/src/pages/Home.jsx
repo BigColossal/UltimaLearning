@@ -44,8 +44,8 @@ const Home = () => {
           </h1>
 
           <p className="hero-subtitle">
-            AI-powered testing that adapts to your skill level and breaks any
-            subject into measurable subskills.
+            AI-powered testing that adapts to your knowledge level and breaks
+            any subject into measurable skills.
           </p>
 
           <div className="hero-actions">
@@ -58,22 +58,68 @@ const Home = () => {
           </div>
         </div>
 
-        <img
-          src="mountain.png"
-          alt="volcano silhouette"
-          className="hero-mountain"
-        />
+        <div className="hero-mountain-wrapper">
+          <img
+            src="mountain.png"
+            alt="volcano silhouette"
+            className="hero-mountain"
+          />
+        </div>
 
         <div className="hero-glow" />
       </section>
 
       {/* ================= PROBLEM ================= */}
       <section className="section problem-section">
+        <div className="top-divider"></div>
+        <div className="ruins-container">
+          <div
+            className="ruins ruin-1"
+            style={{ backgroundImage: "url('ruins.png')" }}
+          ></div>
+          <div
+            className="ruins ruin-2"
+            style={{ backgroundImage: "url('ruins2.webp')" }}
+          ></div>
+          <div
+            className="ruins ruin-3"
+            style={{ backgroundImage: "url('ruins3.png')" }}
+          ></div>
+          <div
+            className="ruins ruin-4"
+            style={{ backgroundImage: "url('ruins4.png')" }}
+          ></div>
+        </div>
+        <div className="ash-layer">
+          {Array.from({ length: 120 }).map((_, i) => {
+            const driftY = Math.random() * 1000 - 200; // vertical movement
+            const wobble = Math.random() * 200 - 40; // horizontal turbulence
+            const scale = 0.4 + Math.random() * 1.2;
+            const blur = Math.random() * 1.5;
+
+            return (
+              <span
+                key={i}
+                className="ash"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  animationDuration: `${12 + Math.random() * 12}s`,
+                  animationDelay: `${Math.random() * 14}s`,
+                  "--driftY": `${driftY}px`,
+                  "--wobble": `${wobble}px`,
+                  "--scale": scale,
+                  filter: `blur(${blur}px)`,
+                }}
+              />
+            );
+          })}
+        </div>
         <div className="section-container">
-          <h2 className="section-title">Most Learning Is Unstructured.</h2>
+          <h2 className="section-title">Learning nowadays is problematic.</h2>
           <p className="section-text">
-            You study randomly. You don’t know your weak points. You can’t
-            measure real progress. And generic quizzes don’t adapt to you.
+            You bounce from topic to topic, unsure what you truly understand.
+            Your weak spots stay hidden. Progress feels invisible. And generic
+            quizzes treat everyone the same.
           </p>
         </div>
       </section>
@@ -81,7 +127,9 @@ const Home = () => {
       {/* ================= SOLUTION ================= */}
       <section className="section solution-section">
         <div className="section-container">
-          <h2 className="section-title">This Is Precision Skill Training.</h2>
+          <h2 className="section-title">
+            So, We Created the Perfect Learning Tool for You.
+          </h2>
           <p className="section-text">
             Define any subject. Break it into subskills. Let AI generate
             adaptive tests that target exactly what you need to improve.

@@ -26,124 +26,201 @@ const seedData = async () => {
       email: "user@ultimalearning.com",
     });
 
-    // Create example skill: Web Development
-    const webDevSkill = await Skill.create({
-      name: "Web Development",
-      description: "Master the art of building modern web applications",
+    /*
+    =========================
+    MATEMÁTICA
+    =========================
+    */
+
+    const matematica = await Skill.create({
+      name: "Matemática",
+      description: "Estudio de números, estructuras y razonamiento lógico",
       userId: user._id,
     });
 
-    // Frontend Domain
-    const frontendDomain = await Domain.create({
-      name: "Frontend Development",
-      description: "Client-side technologies and frameworks",
-      skillId: webDevSkill._id,
-    });
-
-    const frontendSubskills = await Subskill.insertMany([
-      {
-        name: "HTML5",
-        description: "Semantic markup and structure",
-        domainId: frontendDomain._id,
-        xp: 250,
-      },
-      {
-        name: "CSS3",
-        description: "Styling and layout techniques",
-        domainId: frontendDomain._id,
-        xp: 300,
-      },
-      {
-        name: "JavaScript",
-        description: "Core programming language",
-        domainId: frontendDomain._id,
-        xp: 500,
-      },
-      {
-        name: "React",
-        description: "Component-based UI library",
-        domainId: frontendDomain._id,
-        xp: 400,
-      },
-      {
-        name: "TypeScript",
-        description: "Typed JavaScript superset",
-        domainId: frontendDomain._id,
-        xp: 200,
-      },
-    ]);
-
-    // Backend Domain
-    const backendDomain = await Domain.create({
-      name: "Backend Development",
-      description: "Server-side technologies and APIs",
-      skillId: webDevSkill._id,
-    });
-
-    const backendSubskills = await Subskill.insertMany([
-      {
-        name: "Node.js",
-        description: "JavaScript runtime environment",
-        domainId: backendDomain._id,
-        xp: 350,
-      },
-      {
-        name: "Express.js",
-        description: "Web application framework",
-        domainId: backendDomain._id,
-        xp: 300,
-      },
-      {
-        name: "MongoDB",
-        description: "NoSQL database",
-        domainId: backendDomain._id,
-        xp: 400,
-      },
-      {
-        name: "RESTful APIs",
-        description: "API design principles",
-        domainId: backendDomain._id,
-        xp: 250,
-      },
-    ]);
-
-    // Create another example skill: Data Science
-    const dataScienceSkill = await Skill.create({
-      name: "Data Science",
-      description: "Extract insights from data using statistical methods",
-      userId: user._id,
-    });
-
-    const mlDomain = await Domain.create({
-      name: "Machine Learning",
-      description: "Algorithms and models for pattern recognition",
-      skillId: dataScienceSkill._id,
+    const algebra = await Domain.create({
+      name: "Álgebra",
+      description: "Manipulación de expresiones y ecuaciones",
+      skillId: matematica._id,
     });
 
     await Subskill.insertMany([
       {
-        name: "Python",
-        description: "Primary programming language",
-        domainId: mlDomain._id,
-        xp: 600,
-      },
-      {
-        name: "NumPy",
-        description: "Numerical computing library",
-        domainId: mlDomain._id,
+        name: "Ecuaciones lineales",
+        description: "Resolver ecuaciones de primer grado",
+        domainId: algebra._id,
         xp: 300,
       },
       {
-        name: "Pandas",
-        description: "Data manipulation library",
-        domainId: mlDomain._id,
+        name: "Sistemas de ecuaciones",
+        description: "Métodos de sustitución y eliminación",
+        domainId: algebra._id,
+        xp: 400,
+      },
+      {
+        name: "Polinomios",
+        description: "Operaciones y factorización",
+        domainId: algebra._id,
+        xp: 350,
+      },
+    ]);
+
+    const geometria = await Domain.create({
+      name: "Geometría",
+      description: "Estudio de figuras y sus propiedades",
+      skillId: matematica._id,
+    });
+
+    await Subskill.insertMany([
+      {
+        name: "Áreas y perímetros",
+        description: "Cálculo en figuras planas",
+        domainId: geometria._id,
+        xp: 250,
+      },
+      {
+        name: "Teorema de Pitágoras",
+        description: "Relación entre lados de triángulos rectángulos",
+        domainId: geometria._id,
+        xp: 300,
+      },
+      {
+        name: "Volumen de sólidos",
+        description: "Cálculo en figuras tridimensionales",
+        domainId: geometria._id,
+        xp: 350,
+      },
+    ]);
+
+    /*
+    =========================
+    HISTORIA
+    =========================
+    */
+
+    const historia = await Skill.create({
+      name: "Historia",
+      description: "Estudio de los eventos y procesos del pasado",
+      userId: user._id,
+    });
+
+    const historiaAntigua = await Domain.create({
+      name: "Historia Antigua",
+      description: "Civilizaciones antiguas y sus aportes",
+      skillId: historia._id,
+    });
+
+    await Subskill.insertMany([
+      {
+        name: "Egipto Antiguo",
+        description: "Faraones, pirámides y cultura",
+        domainId: historiaAntigua._id,
+        xp: 250,
+      },
+      {
+        name: "Grecia Clásica",
+        description: "Democracia y filosofía",
+        domainId: historiaAntigua._id,
+        xp: 300,
+      },
+      {
+        name: "Imperio Romano",
+        description: "Expansión y legado cultural",
+        domainId: historiaAntigua._id,
+        xp: 350,
+      },
+    ]);
+
+    const historiaModerna = await Domain.create({
+      name: "Historia Moderna",
+      description: "Eventos desde el siglo XV en adelante",
+      skillId: historia._id,
+    });
+
+    await Subskill.insertMany([
+      {
+        name: "Revolución Francesa",
+        description: "Cambios políticos y sociales en Europa",
+        domainId: historiaModerna._id,
+        xp: 300,
+      },
+      {
+        name: "Independencias de América",
+        description: "Movimientos independentistas",
+        domainId: historiaModerna._id,
         xp: 350,
       },
       {
-        name: "Scikit-learn",
-        description: "Machine learning library",
-        domainId: mlDomain._id,
-        xp: 200,
+        name: "Guerras Mundiales",
+        description: "Conflictos globales del siglo XX",
+        domainId: historiaModerna._id,
+        xp: 400,
+      },
+    ]);
+
+    /*
+    =========================
+    CIENCIA
+    =========================
+    */
+
+    const ciencia = await Skill.create({
+      name: "Ciencia",
+      description: "Estudio del mundo natural mediante el método científico",
+      userId: user._id,
+    });
+
+    const biologia = await Domain.create({
+      name: "Biología",
+      description: "Estudio de los seres vivos",
+      skillId: ciencia._id,
+    });
+
+    await Subskill.insertMany([
+      {
+        name: "La célula",
+        description: "Estructura y función celular",
+        domainId: biologia._id,
+        xp: 300,
+      },
+      {
+        name: "Genética básica",
+        description: "Herencia y ADN",
+        domainId: biologia._id,
+        xp: 350,
+      },
+      {
+        name: "Ecosistemas",
+        description: "Relaciones entre organismos y ambiente",
+        domainId: biologia._id,
+        xp: 250,
+      },
+    ]);
+
+    const fisica = await Domain.create({
+      name: "Física",
+      description: "Leyes que rigen la materia y la energía",
+      skillId: ciencia._id,
+    });
+
+    await Subskill.insertMany([
+      {
+        name: "Movimiento y fuerzas",
+        description: "Conceptos de velocidad y aceleración",
+        domainId: fisica._id,
+        xp: 300,
+      },
+      {
+        name: "Energía",
+        description: "Tipos y transformaciones de energía",
+        domainId: fisica._id,
+        xp: 350,
+      },
+      {
+        name: "Electricidad básica",
+        description: "Corriente y circuitos simples",
+        domainId: fisica._id,
+        xp: 400,
       },
     ]);
 

@@ -1,20 +1,43 @@
 /* Tier border colors */
-.subskill-card.tier-bronze { border-left: 4px solid #cd7f32; }
-.subskill-card.tier-silver { border-left: 4px solid #c0c0c0; }
-.subskill-card.tier-gold { border-left: 4px solid #ffd700; }
-.subskill-card.tier-platinum { border-left: 4px solid #e5e4e2; }
-.subskill-card.tier-diamond { border-left: 4px solid #b9f2ff; }
-.subskill-card.tier-master { border-left: 4px solid #8b5cf6; }
-.subskill-card.tier-legend { border-left: 4px solid #ff6b35; }
-.subskill-card.tier-mythic { border-left: 4px solid #ff006e; }
-.subskill-card.tier-omniversal { border-left: 4px solid #8338ec; }
+.subskill-card.tier-dormant {
+  border-left: 4px solid #636261;
+}
+.subskill-card.tier-smoldering {
+  border-left: 4px solid #ffd94f;
+}
+.subskill-card.tier-volatile {
+  border-left: 4px solid #feab59;
+}
+.subskill-card.tier-seismic {
+  border-left: 4px solid #ef804c;
+}
+.subskill-card.tier-infernal {
+  border-left: 4px solid #fc4242;
+}
+.subskill-card.tier-meteoric {
+  border-left: 4px solid #b61a1a;
+}
+.subskill-card.tier-disasterous {
+  border-left: 4px solid #4e0e0e;
+}
+.subskill-card.tier-supervolcanic {
+  border-left: 4px solid #280707;
+}
+.subskill-card.tier-apocalyptic {
+  border-left: 4px solid #0c0c0c;
+}
+.subskill-card.tier-primordial {
+  border-left: 4px solid #8338ec;
+}
 
 .subskill-card {
   display: block;
   background: var(--card-bg);
   border-radius: 1.5rem;
   padding: 2rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border: 2px solid var(--border-color);
   border-left: 4px solid var(--border-color);
   text-decoration: none;
@@ -26,25 +49,33 @@
 }
 
 .subskill-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .subskill-card::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+  background: linear-gradient(
+    135deg,
+    rgba(241, 99, 99, 0.03),
+    rgba(246, 151, 92, 0.03)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -52,7 +83,9 @@
 
 .subskill-card:hover {
   transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.15),
+    0 10px 10px -5px rgba(0, 0, 0, 0.1);
   border-color: var(--primary-color);
 }
 
@@ -83,7 +116,11 @@
 }
 
 .subskill-card:hover .subskill-card-name {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -129,6 +166,10 @@
 
 @media (prefers-color-scheme: dark) {
   .subskill-card::after {
-    background: linear-gradient(135deg, rgba(229, 231, 235, 0.03), rgba(209, 213, 219, 0.03));
+    background: linear-gradient(
+      135deg,
+      rgba(235, 229, 229, 0.03),
+      rgba(219, 209, 209, 0.03)
+    );
   }
 }

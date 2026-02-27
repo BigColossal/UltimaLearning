@@ -42,7 +42,9 @@
   padding: 2rem;
   border: 2px solid var(--border-color);
   text-align: center;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -50,25 +52,33 @@
 }
 
 .stat-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .stat-card::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+  background: linear-gradient(
+    135deg,
+    rgba(241, 99, 99, 0.03),
+    rgba(246, 118, 92, 0.03)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -76,7 +86,9 @@
 
 .stat-card:hover {
   transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.15),
+    0 10px 10px -5px rgba(0, 0, 0, 0.1);
   border-color: var(--primary-color);
 }
 
@@ -90,7 +102,11 @@
 
 @media (prefers-color-scheme: dark) {
   .stat-card::after {
-    background: linear-gradient(135deg, rgba(229, 231, 235, 0.03), rgba(209, 213, 219, 0.03));
+    background: linear-gradient(
+      135deg,
+      rgba(235, 229, 229, 0.03),
+      rgba(219, 214, 209, 0.03)
+    );
   }
 }
 
@@ -106,7 +122,11 @@
 .stat-value {
   font-size: 2.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -129,16 +149,36 @@
   gap: 0.875rem;
 }
 
-/* Tier border colors for subskill progress items */
-.subskill-progress-item.tier-bronze { border-left-color: #cd7f32; }
-.subskill-progress-item.tier-silver { border-left-color: #c0c0c0; }
-.subskill-progress-item.tier-gold { border-left-color: #ffd700; }
-.subskill-progress-item.tier-platinum { border-left-color: #e5e4e2; }
-.subskill-progress-item.tier-diamond { border-left-color: #b9f2ff; }
-.subskill-progress-item.tier-master { border-left-color: #8b5cf6; }
-.subskill-progress-item.tier-legend { border-left-color: #ff6b35; }
-.subskill-progress-item.tier-mythic { border-left-color: #ff006e; }
-.subskill-progress-item.tier-omniversal { border-left-color: #8338ec; }
+.subskill-progress-item.tier-dormant {
+  border-left-color: #636261;
+}
+.subskill-progress-item.tier-smoldering {
+  border-left-color: #ffd94f;
+}
+.subskill-progress-item.tier-volatile {
+  border-left-color: #f89b3e;
+}
+.subskill-progress-item.tier-seismic {
+  border-left-color: #f7804d;
+}
+.subskill-progress-item.tier-infernal {
+  border-left-color: #fc4242;
+}
+.subskill-progress-item.tier-meteoric {
+  border-left-color: #b61a1a;
+}
+.subskill-progress-item.tier-disasterous {
+  border-left-color: #4e0e0e;
+}
+.subskill-progress-item.tier-supervolcanic {
+  border-left-color: #280707;
+}
+.subskill-progress-item.tier-apocalyptic {
+  border-left-color: #0c0c0c;
+}
+.subskill-progress-item.tier-primordial {
+  border-left-color: #8338ec;
+}
 
 .subskill-progress-item {
   display: block;
@@ -150,32 +190,42 @@
   text-decoration: none;
   color: var(--text-primary);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
 }
 
 .subskill-progress-item::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .subskill-progress-item::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+  background: linear-gradient(
+    135deg,
+    rgba(241, 99, 99, 0.03),
+    rgba(246, 164, 92, 0.03)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -183,7 +233,9 @@
 
 .subskill-progress-item:hover {
   transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.15),
+    0 10px 10px -5px rgba(0, 0, 0, 0.1);
   border-color: var(--primary-color);
 }
 
@@ -197,7 +249,11 @@
 
 @media (prefers-color-scheme: dark) {
   .subskill-progress-item::after {
-    background: linear-gradient(135deg, rgba(229, 231, 235, 0.03), rgba(209, 213, 219, 0.03));
+    background: linear-gradient(
+      135deg,
+      rgba(235, 233, 229, 0.03),
+      rgba(219, 217, 209, 0.03)
+    );
   }
 }
 
@@ -245,7 +301,7 @@
   .profile-stats {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .subskill-progress-header {
     flex-direction: column;
     gap: 0.75rem;

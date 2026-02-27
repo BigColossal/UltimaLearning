@@ -14,16 +14,16 @@ export const getXPProgress = (xp) => {
 export const getTier = (level) => {
   const tierNumber = Math.floor(level / 10);
   const tiers = [
-    'Bronze',
-    'Silver',
-    'Gold',
-    'Platinum',
-    'Diamond',
-    'Master',
-    'Legend',
-    'Mythic',
-    'Omniversal',
-    'Omniversal+',
+    "Dormant",
+    "Smoldering",
+    "Volatile",
+    "Seismic",
+    "Infernal",
+    "Meteoric",
+    "Disasterous",
+    "Supervolcanic",
+    "Apocalyptic",
+    "primordial",
   ];
   return tiers[Math.min(tierNumber, tiers.length - 1)];
 };

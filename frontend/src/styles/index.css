@@ -199,7 +199,7 @@ body {
   transform: translateY(-6px);
   border-color: var(--primary-color);
   box-shadow:
-    0 25px 60px rgba(99, 102, 241, 0.15),
+    0 25px 60px rgba(241, 99, 99, 0.15),
     0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
@@ -247,7 +247,7 @@ body {
 .form-input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(241, 99, 99, 0.1);
   background-color: var(--card-bg);
 }
 
@@ -284,8 +284,8 @@ body {
   );
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow:
-    0 0 20px rgba(139, 92, 246, 0.7),
-    0 0 40px rgba(236, 72, 153, 0.4);
+    0 0 20px rgba(246, 92, 92, 0.7),
+    0 0 40px rgba(236, 72, 72, 0.4);
 }
 
 .level-badge {
@@ -297,48 +297,62 @@ body {
   margin-top: 0.5rem;
 }
 
-.tier-bronze {
-  background: linear-gradient(135deg, #cd7f32, #b87333);
+.tier-dormant {
+  background: linear-gradient(135deg, #171717, #000000);
   color: white;
-  box-shadow: 0 2px 8px rgba(205, 127, 50, 0.3);
+  box-shadow: 0 2px 8px rgba(99, 98, 97, 0.3);
 }
-.tier-silver {
-  background: linear-gradient(135deg, #c0c0c0, #a8a8a8);
-  color: #111827;
-  box-shadow: 0 2px 8px rgba(192, 192, 192, 0.3);
-}
-.tier-gold {
-  background: linear-gradient(135deg, #ffd700, #ffed4e);
-  color: #111827;
-  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
-}
-.tier-platinum {
-  background: linear-gradient(135deg, #e5e4e2, #d4d3d1);
-  color: #111827;
-  box-shadow: 0 2px 8px rgba(229, 228, 226, 0.3);
-}
-.tier-diamond {
-  background: linear-gradient(135deg, #b9f2ff, #87ceeb);
-  color: #111827;
-  box-shadow: 0 2px 8px rgba(185, 242, 255, 0.4);
-}
-.tier-master {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+
+.tier-smoldering {
+  background: linear-gradient(135deg, #171717, #000000);
   color: white;
-  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 2px 8px rgba(255, 217, 79, 0.4);
 }
-.tier-legend {
-  background: linear-gradient(135deg, #ff6b35, #ff8c42);
+
+.tier-volatile {
+  background: linear-gradient(135deg, #171717, #000000);
   color: white;
-  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.4);
+  box-shadow: 0 2px 8px rgba(250, 122, 58, 0.4);
 }
-.tier-mythic {
-  background: linear-gradient(135deg, #ff006e, #e60063);
+
+.tier-seismic {
+  background: linear-gradient(135deg, #171717, #000000);
   color: white;
-  box-shadow: 0 2px 8px rgba(255, 0, 110, 0.4);
+  box-shadow: 0 2px 8px rgba(248, 89, 41, 0.4);
 }
-.tier-omniversal {
-  background: linear-gradient(135deg, #8338ec, #6d28d9);
+
+.tier-infernal {
+  background: linear-gradient(135deg, #171717, #000000);
+  color: white;
+  box-shadow: 0 2px 8px rgba(252, 66, 66, 0.4);
+}
+
+.tier-meteoric {
+  background: linear-gradient(135deg, #171717, #000000);
+  color: white;
+  box-shadow: 0 2px 8px rgba(182, 26, 26, 0.4);
+}
+
+.tier-disasterous {
+  background: linear-gradient(135deg, #171717, #000000);
+  color: white;
+  box-shadow: 0 2px 8px rgba(78, 14, 14, 0.5);
+}
+
+.tier-supervolcanic {
+  background: linear-gradient(135deg, #171717, #000000);
+  color: white;
+  box-shadow: 0 2px 8px rgba(40, 7, 7, 0.6);
+}
+
+.tier-apocalyptic {
+  background: linear-gradient(135deg, #171717, #000000);
+  color: white;
+  box-shadow: 0 2px 8px rgba(12, 12, 12, 0.6);
+}
+
+.tier-primordial {
+  background: linear-gradient(135deg, #171717, #000000);
   color: white;
   box-shadow: 0 2px 8px rgba(131, 56, 236, 0.5);
 }
