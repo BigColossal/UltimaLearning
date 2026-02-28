@@ -1,7 +1,8 @@
+import "./config/dotenv.js";
+
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import dotenv from "dotenv";
 import skillRoutes from "./routes/skillRoutes.js";
 import domainRoutes from "./routes/domainRoutes.js";
 import subskillRoutes from "./routes/subskillRoutes.js";
@@ -11,8 +12,7 @@ import cookieParser from "cookie-parser";
 import passport from "passport";
 import "./config/passport.js";
 import authRoutes from "./routes/authRoutes.js";
-
-dotenv.config();
+import { protect } from "./middleware/authMiddleware.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,10 +25,10 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/skills", skillRoutes);
-app.use("/api/domains", domainRoutes);
-app.use("/api/subskills", subskillRoutes);
+app.use("/api/users", protect, userRoutes);
+app.use("/api/skills", protect, skillRoutes);
+app.use("/api/domains", protect, domainRoutes);
+app.use("/api/subskills", protect, subskillRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

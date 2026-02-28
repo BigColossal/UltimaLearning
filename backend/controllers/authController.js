@@ -27,18 +27,30 @@ const sendTokenResponse = (user, res) => {
     accessToken,
     user: {
       id: user._id,
-      name: user.name,
+      username: user.username,
       email: user.email,
     },
   });
 };
 
 export const register = async (req, res) => {
-  const { name, email, password } = req.body;
+  try {
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
 
-  const user = await User.create({ name, email, password });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already in use" });
+    }
 
-  sendTokenResponse(user, res);
+    const user = await User.create({ username, email, password });
+    sendTokenResponse(user, res);
+  } catch (err) {
+    console.error("Backend register error:", err);
+    res.status(400).json({ message: err.message || "Registration failed" });
+  }
 };
 
 export const login = async (req, res) => {
@@ -66,4 +78,27 @@ export const refreshToken = async (req, res) => {
 export const logout = (req, res) => {
   res.clearCookie("refreshToken");
   res.json({ message: "Logged out" });
+};
+
+export const getCurrentUser = async (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+    });
+  } catch (err) {
+    res.status(401).json({ message: "Invalid or expired token" });
+  }
 };

@@ -1,28 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState, useRef, useMemo } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useUser } from "../context/UserContext"; // 👈 import your auth context
 import "../styles/Navbar.css";
 
 const Navbar = () => {
+  const { user, logout } = useUser(); // get user and logout
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const linksRef = useRef([]);
 
-  // Generate particles once (not on every render)
-  const particles = useMemo(() => {
-    return Array.from({ length: 50 }).map((_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      delay: Math.random() * 5,
-      duration: 6 + Math.random() * 6,
-      size: 2 + Math.random() * 3,
-    }));
-  }, []);
-
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -31,44 +20,40 @@ const Navbar = () => {
   const handleMouseMove = (e, index) => {
     const el = linksRef.current[index];
     if (!el) return;
-
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
-
     el.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
   };
-
   const handleMouseLeave = (index) => {
     const el = linksRef.current[index];
     if (!el) return;
     el.style.transform = "translate(0px, 0px)";
   };
 
+  // Base nav links
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/hub", label: "Hub" },
-    { path: "/profile", label: "Profile" },
   ];
+
+  // Add auth-specific links
+  if (user) {
+    navLinks.push({ path: "/profile", label: "Profile" });
+    navLinks.push({
+      path: "/logout",
+      label: "Logout",
+      onClick: () => {
+        logout();
+        navigate("/");
+      },
+    });
+  } else {
+    navLinks.push({ path: "/login", label: "Login" });
+  }
 
   return (
     <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
-      {/* <div className="navbar-particles">
-        {particles.map((p) => (
-          <span
-            key={p.id}
-            className="particle"
-            style={{
-              left: `${p.left}%`,
-              width: `${p.size}px`,
-              height: `${p.size}px`,
-              animationDelay: `${p.delay}s`,
-              animationDuration: `${p.duration}s`,
-            }}
-          />
-        ))}
-      </div> */}
-
       <div className="navbar-glow" />
 
       <div className="navbar-container">
@@ -81,10 +66,11 @@ const Navbar = () => {
           {navLinks.map((link, index) => (
             <Link
               key={link.path}
-              to={link.path}
+              to={link.path !== "/logout" ? link.path : "#"} // logout is handled via onClick
               ref={(el) => (linksRef.current[index] = el)}
               onMouseMove={(e) => handleMouseMove(e, index)}
               onMouseLeave={() => handleMouseLeave(index)}
+              onClick={link.onClick} // only exists for logout
               className={`nav-link ${
                 location.pathname === link.path ? "active" : ""
               }`}

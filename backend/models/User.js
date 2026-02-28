@@ -5,32 +5,37 @@ const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      required: true,
-      unique: true,
-      trim: true,
+      required: function () {
+        return !this.googleId;
+      },
     },
     email: {
       type: String,
-      required: true,
+      required: function () {
+        return !this.googleId;
+      },
       unique: true,
-      trim: true,
-      lowercase: true,
+      sparse: true,
     },
     password: { type: String },
-    googleId: { type: String },
+    googleId: { type: String, unique: true, sparse: true },
+    name: { type: String },
     avatar: { type: String },
   },
   { timestamps: true },
 );
 
+// Only hash password if it exists
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  this.password = bcrypt.hash(this.password, 12);
+  if (!this.isModified("password") || !this.password) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
   next();
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  return bcrypt.compare(enteredPassword, this.password);
+  if (!this.password) return false;
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 const User = mongoose.model("User", userSchema);
