@@ -2,38 +2,27 @@ import Skill from "../models/Skill.js";
 import Domain from "../models/Domain.js";
 import Subskill from "../models/Subskill.js";
 
+// Get all skills for the currently authenticated user
 export const getSkills = async (req, res) => {
   try {
-    const userId = req.query.userId || "Jeremy";
-    const user = await import("../models/User.js").then((m) => m.default);
-    let userDoc = await user.findOne({ username: userId });
-
-    if (!userDoc) {
-      userDoc = await user.create({
-        username: userId,
-        email: `${userId}@ultimalearning.com`,
-      });
-    }
-
-    const skills = await Skill.find({ userId: userDoc._id }).sort({
-      createdAt: -1,
-    });
+    const userId = req.user._id; // <- assumes req.user is set by auth middleware
+    const skills = await Skill.find({ userId }).sort({ createdAt: -1 });
     res.json(skills);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
+// Get a single skill by ID, including domains and subskills
 export const getSkillById = async (req, res) => {
   try {
     const skill = await Skill.findById(req.params.id);
-    if (!skill) {
-      return res.status(404).json({ error: "Skill not found" });
-    }
+    if (!skill) return res.status(404).json({ error: "Skill not found" });
 
     const domains = await Domain.find({ skillId: skill._id }).sort({
       createdAt: 1,
     });
+
     const domainsWithSubskills = await Promise.all(
       domains.map(async (domain) => {
         const subskills = await Subskill.find({ domainId: domain._id }).sort({
@@ -49,23 +38,14 @@ export const getSkillById = async (req, res) => {
   }
 };
 
+// Create a new skill for the authenticated user
 export const createSkill = async (req, res) => {
   try {
-    const userId = req.body.userId || "Jeremy";
-    const user = await import("../models/User.js").then((m) => m.default);
-    let userDoc = await user.findOne({ username: userId });
-
-    if (!userDoc) {
-      userDoc = await user.create({
-        username: userId,
-        email: `${userId}@ultimalearning.com`,
-      });
-    }
-
+    const userId = req.user._id; // <- real logged-in user
     const skill = await Skill.create({
       name: req.body.name,
       description: req.body.description || "",
-      userId: userDoc._id,
+      userId,
     });
 
     res.status(201).json(skill);
@@ -74,6 +54,7 @@ export const createSkill = async (req, res) => {
   }
 };
 
+// Update an existing skill
 export const updateSkill = async (req, res) => {
   try {
     const skill = await Skill.findByIdAndUpdate(
@@ -85,9 +66,7 @@ export const updateSkill = async (req, res) => {
       { new: true, runValidators: true },
     );
 
-    if (!skill) {
-      return res.status(404).json({ error: "Skill not found" });
-    }
+    if (!skill) return res.status(404).json({ error: "Skill not found" });
 
     res.json(skill);
   } catch (error) {
@@ -95,12 +74,11 @@ export const updateSkill = async (req, res) => {
   }
 };
 
+// Delete a skill, its domains, and subskills
 export const deleteSkill = async (req, res) => {
   try {
     const skill = await Skill.findById(req.params.id);
-    if (!skill) {
-      return res.status(404).json({ error: "Skill not found" });
-    }
+    if (!skill) return res.status(404).json({ error: "Skill not found" });
 
     // Delete all domains and subskills
     const domains = await Domain.find({ skillId: skill._id });
