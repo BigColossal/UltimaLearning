@@ -139,26 +139,36 @@
    GRID LAYOUT
 ========================================= */
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 380px));
-  justify-content: center;
-  gap: 2.5rem;
+/* =========================================
+   MASONRY SKILL GRID
+========================================= */
 
-  position: relative;
-  z-index: 1;
+.skills-grid {
+  /* Masonry using columns */
+  column-width: 340px; /* minimum card width */
+  column-gap: 2.5rem; /* space between columns */
+
+  /* Optional for stacking nicely on small screens */
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.skill-card-wrapper {
+  /* Needed for columns to work properly */
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 4rem; /* vertical spacing between cards */
+
+  /* Keep previous hover/flex styles */
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.3s ease;
 }
 
 /* =========================================
    CARD WRAPPER
 ========================================= */
-
-.skill-card-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: transform 0.3s ease;
-}
 
 .skill-card-wrapper:hover {
   transform: translateY(-4px);
