@@ -142,7 +142,7 @@
 }
 
 .domain-accordion-content.open {
-  max-height: 800px; /* Must exceed content height */
+  max-height: 1400px; /* Must exceed content height */
   padding: 1.5rem 2rem;
 
   opacity: 1;

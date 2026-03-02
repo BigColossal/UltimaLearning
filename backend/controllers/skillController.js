@@ -1,6 +1,7 @@
 import Skill from "../models/Skill.js";
 import Domain from "../models/Domain.js";
 import Subskill from "../models/Subskill.js";
+import { importCurriculum } from "../utils/importCurriculum.js";
 
 // Get all skills for the currently authenticated user
 export const getSkills = async (req, res) => {
@@ -91,5 +92,22 @@ export const deleteSkill = async (req, res) => {
     res.json({ message: "Skill deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+};
+
+export const importSkill = async (req, res) => {
+  try {
+    const curriculumJSON = req.body;
+    const userId = req.user._id;
+
+    const skill = await importCurriculum(curriculumJSON, userId);
+
+    res.json({
+      message: "Curriculum imported successfully",
+      skill,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Import failed" });
   }
 };

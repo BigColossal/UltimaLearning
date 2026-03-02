@@ -163,6 +163,11 @@ Only generate the test and XP structure.
 
   return (
     <div className="domain-page">
+      <div className="back-button-wrapper">
+        <button className="btn btn-danger" onClick={() => navigate(-1)}>
+          Back to Skill Page
+        </button>
+      </div>
       <div className="domain-page-header">
         {editing ? (
           <form onSubmit={handleUpdateDomain} className="domain-edit-form">

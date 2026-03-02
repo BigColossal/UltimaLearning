@@ -1,0 +1,50 @@
+.edit-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* OPEN STATE */
+.edit-overlay.open {
+  opacity: 1;
+}
+
+/* CLOSING STATE (force transition back) */
+.edit-overlay.closing {
+  opacity: 0;
+}
+
+.edit-card {
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+
+  transform: scale(0.8) translateY(20px);
+  opacity: 0;
+
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease;
+}
+
+.edit-overlay.open .edit-card {
+  transform: scale(1) translateY(10px);
+  opacity: 1;
+}
+
+.edit-overlay.closing .edit-card {
+  transform: scale(0.9) translateY(10px);
+  opacity: 0;
+}

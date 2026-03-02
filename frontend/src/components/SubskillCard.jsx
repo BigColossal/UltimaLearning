@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { getXPProgress, getTier, getTierClass } from '../utils/levelUtils';
-import '../styles/SubskillCard.css';
+import { Link } from "react-router-dom";
+import { getXPProgress, getTier, getTierClass } from "../utils/levelUtils";
+import "../styles/SubskillCard.css";
 
 const SubskillCard = ({ subskill }) => {
   const xpProgress = getXPProgress(subskill.xp);
@@ -8,7 +8,10 @@ const SubskillCard = ({ subskill }) => {
   const tierClass = getTierClass(subskill.level);
 
   return (
-    <Link to={`/subskill/${subskill._id}`} className={`subskill-card ${tierClass}`}>
+    <Link
+      to={`/subskill/${subskill._id}`}
+      className={`subskill-card ${tierClass}`}
+    >
       <div className="subskill-card-header">
         <h3 className="subskill-card-name">{subskill.name}</h3>
         <div className="subskill-card-level">
@@ -17,11 +20,7 @@ const SubskillCard = ({ subskill }) => {
           </span>
         </div>
       </div>
-      
-      {subskill.description && (
-        <p className="subskill-card-description">{subskill.description}</p>
-      )}
-      
+
       <div className="subskill-card-progress">
         <div className="xp-info">
           <span className="xp-text">{subskill.xp} XP</span>
@@ -29,10 +28,7 @@ const SubskillCard = ({ subskill }) => {
         </div>
         <div className="xp-bar-container">
           <div className="xp-bar">
-            <div 
-              className="xp-bar-fill" 
-              style={{ width: `${xpProgress}%` }}
-            />
+            <div className="xp-bar-fill" style={{ width: `${xpProgress}%` }} />
           </div>
         </div>
       </div>

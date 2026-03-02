@@ -8,6 +8,8 @@ import {
 } from "../api/api";
 import DomainAccordion from "../components/DomainAccordion";
 import ConfirmModal from "../components/confirmModal";
+import EditSkillCard from "../components/EditSkillCard";
+import CreateDomainCard from "../components/CreateDomainCard";
 import "../styles/SkillPage.css";
 
 const SkillPage = () => {
@@ -71,16 +73,13 @@ const SkillPage = () => {
     }
   };
 
-  const handleCreateDomain = async (e) => {
-    e.preventDefault();
+  const handleCreateDomain = async (data) => {
     try {
-      await createDomain(id, domainFormData);
-      setDomainFormData({ name: "", description: "" });
+      await createDomain(id, data);
       setShowDomainForm(false);
       await loadSkill();
     } catch (error) {
-      console.error("Error creating domain:", error);
-      alert("Failed to create domain. Please try again.");
+      console.error(error);
     }
   };
 
@@ -93,138 +92,80 @@ const SkillPage = () => {
   }
 
   return (
-    <div className="skill-page">
-      <div className="skill-page-header">
-        <div className="back-button-wrapper">
-          <button className="btn btn-danger" onClick={() => navigate("/hub")}>
-            Back to Hub
-          </button>
-        </div>
-        {editing ? (
-          <form onSubmit={handleUpdateSkill} className="skill-edit-form">
-            <input
-              type="text"
-              className="form-input"
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              required
-            />
-            <textarea
-              className="form-input form-textarea"
-              value={formData.description}
-              onChange={(e) =>
-                setFormData({ ...formData, description: e.target.value })
-              }
-            />
-            <div className="form-actions">
-              <button type="submit" className="btn btn-primary">
-                Save
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => setEditing(false)}
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        ) : (
-          <>
-            <div>
-              <h1>{skill.name}</h1>
-              <p className="skill-description">
-                {skill.description || "No description"}
-              </p>
-            </div>
-            <div className="skill-actions">
-              <button
-                className="btn btn-secondary"
-                onClick={() => setEditing(true)}
-              >
-                Edit
-              </button>
-              <button
-                className="btn btn-danger"
-                onClick={() => setDeleteTarget(id)}
-              >
-                Delete
-              </button>
-            </div>
-          </>
-        )}
-      </div>
+    <div
+      className={`skill-page ${editing || showDomainForm ? "modal-open-bg" : ""}`}
+    >
+      <div className="volcanic-particles" />
+      <div className={`skill-page-content ${editing ? "modal-open" : ""}`}>
+        <div className="skill-page-header">
+          <div className="back-button-wrapper">
+            <button className="btn btn-danger" onClick={() => navigate("/hub")}>
+              Back to Hub
+            </button>
+          </div>
+          <div>
+            <h1>{skill.name}</h1>
+            <p className="skill-description">
+              {skill.description || "No description"}
+            </p>
+          </div>
 
-      <div className="domains-section">
-        <div className="domains-header">
-          <h2>Domains ({skill.domains?.length || 0})</h2>
-          <button
-            className="btn btn-primary"
-            onClick={() => setShowDomainForm(!showDomainForm)}
-          >
-            {showDomainForm ? "Cancel" : "+ Add Domain"}
-          </button>
+          <div className="skill-actions">
+            <button
+              className="btn btn-secondary"
+              onClick={() => setEditing(true)}
+            >
+              Edit
+            </button>
+            <button
+              className="btn btn-danger"
+              onClick={() => setDeleteTarget(id)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
 
-        {showDomainForm && (
-          <div className="create-domain-form card">
-            <h3>Create New Domain</h3>
-            <form onSubmit={handleCreateDomain}>
-              <div className="form-group">
-                <label className="form-label">Domain Name *</label>
-                <input
-                  type="text"
-                  className="form-input"
-                  value={domainFormData.name}
-                  onChange={(e) =>
-                    setDomainFormData({
-                      ...domainFormData,
-                      name: e.target.value,
-                    })
-                  }
-                  required
-                  placeholder="e.g., Frontend Development"
-                />
-              </div>
-              <div className="form-group">
-                <label className="form-label">Description</label>
-                <textarea
-                  className="form-input form-textarea"
-                  value={domainFormData.description}
-                  onChange={(e) =>
-                    setDomainFormData({
-                      ...domainFormData,
-                      description: e.target.value,
-                    })
-                  }
-                  placeholder="Describe this domain..."
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Create Domain
-              </button>
-            </form>
+        <div className="domains-section">
+          <div className="domains-header">
+            <h2>Domains ({skill.domains?.length || 0})</h2>
+            <button
+              className="btn btn-primary"
+              onClick={() => setShowDomainForm(true)}
+            >
+              Add Domain
+            </button>
           </div>
-        )}
 
-        {skill.domains && skill.domains.length > 0 ? (
-          <div className="domains-list">
-            {skill.domains.map((domain) => (
-              <DomainAccordion
-                key={domain._id}
-                domain={domain}
-                subskills={domain.subskills || []}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="empty-state">
-            <p>No domains yet. Create your first domain to get started!</p>
-          </div>
-        )}
-      </div>
+          {skill.domains && skill.domains.length > 0 ? (
+            <div className="domains-list">
+              {skill.domains.map((domain) => (
+                <DomainAccordion
+                  key={domain._id}
+                  domain={domain}
+                  subskills={domain.subskills || []}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="empty-state">
+              <p>No domains yet. Create your first domain to get started!</p>
+            </div>
+          )}
+        </div>
+      </div>{" "}
+      <CreateDomainCard
+        isOpen={showDomainForm}
+        onCreate={handleCreateDomain}
+        onCancel={() => setShowDomainForm(false)}
+      />
+      <EditSkillCard
+        isOpen={editing}
+        formData={formData}
+        setFormData={setFormData}
+        onSave={handleUpdateSkill}
+        onCancel={() => setEditing(false)}
+      />
       <ConfirmModal
         isOpen={!!deleteTarget}
         title="Delete Skill?"

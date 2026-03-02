@@ -22,6 +22,7 @@ export const clearToken = () => {
 
 const api = axios.create({
   baseURL: API_BASE_URL,
+  withCredentials: true, // IMPORTANT
   headers: {
     "Content-Type": "application/json",
   },
@@ -50,10 +51,29 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      clearToken();
-      window.location.href = "/login";
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        const { data } = await axios.post(
+          "/api/auth/refresh",
+          {},
+          { withCredentials: true },
+        );
+
+        setToken(data.accessToken);
+
+        originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
+
+        return api(originalRequest);
+      } catch (refreshError) {
+        clearToken();
+        window.location.href = "/login";
+        return Promise.reject(refreshError);
+      }
     }
 
     return Promise.reject(error);
