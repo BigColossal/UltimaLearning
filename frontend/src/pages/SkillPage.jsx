@@ -7,7 +7,7 @@ import {
   createDomain,
 } from "../api/api";
 import DomainAccordion from "../components/DomainAccordion";
-import ConfirmModal from "../components/confirmModal";
+import ConfirmModal from "../components/ConfirmModal";
 import EditSkillCard from "../components/EditSkillCard";
 import CreateDomainCard from "../components/CreateDomainCard";
 import "../styles/SkillPage.css";

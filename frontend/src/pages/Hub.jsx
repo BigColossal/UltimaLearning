@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useUser } from "../context/UserContext";
 import { getSkills, createSkill, deleteSkill, getSkillById } from "../api/api";
-import ConfirmModal from "../components/confirmModal";
+import ConfirmModal from "../components/ConfirmModal";
 import SkillCard from "../components/SkillCard";
 import "../styles/Hub.css";
 
