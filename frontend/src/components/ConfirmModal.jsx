@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/ConfirmModal.css";
+import "../styles/confirmModal.css";
 
 const ConfirmModal = ({
   isOpen,
