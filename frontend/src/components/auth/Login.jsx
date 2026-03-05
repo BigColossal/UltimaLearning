@@ -51,7 +51,7 @@ const Login = ({ switchToRegister }) => {
 
       <div className="divider">OR</div>
 
-      <a href="http://localhost:5000/api/auth/google" className="google-btn">
+      <a href="/api/auth/google" className="google-btn">
         Continue with Google
       </a>
 
