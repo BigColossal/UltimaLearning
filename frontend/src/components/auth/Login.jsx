@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useUser } from "../../context/UserContext";
-import "../../styles/Auth.css";
+import "../../styles/auth.css";
 
 const Login = ({ switchToRegister }) => {
   const { login } = useUser();
