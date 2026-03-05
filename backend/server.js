@@ -37,9 +37,26 @@ const authLimiter = rateLimit({
 });
 
 // Middleware
-app.set("trust proxy", 1);
-app.use(cookieParser());
 app.use(passport.initialize());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        connectSrc: [
+          "'self'",
+          "http://localhost:5000",
+          "http://localhost:3000",
+        ],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:"],
+      },
+    },
+  }),
+);
+app.use(cookieParser());
+app.set("trust proxy", 1);
 app.use(
   cors({
     origin:
@@ -50,9 +67,12 @@ app.use(
   }),
 );
 app.use(express.json());
-app.use(helmet());
 app.use("/api", limiter);
 app.use("/api/auth/login", authLimiter);
+
+app.get("/.well-known/appspecific/com.chrome.devtools.json", (req, res) => {
+  res.json({});
+});
 
 // Routes
 app.use("/api/auth", authRoutes);

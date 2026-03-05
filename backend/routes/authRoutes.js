@@ -10,6 +10,10 @@ import {
 import jwt from "jsonwebtoken";
 
 const router = express.Router();
+const FRONTEND_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.FRONTEND_URL
+    : "http://localhost:3000";
 
 router.post("/register", register);
 router.post("/login", login);
@@ -47,7 +51,9 @@ router.get(
       sameSite: "lax",
     });
 
-    res.redirect(`/oauth-success?token=${accessToken}&userId=${req.user._id}`);
+    res.redirect(
+      `${FRONTEND_URL}/oauth-success?token=${accessToken}&userId=${req.user._id}`,
+    );
   },
 );
 
