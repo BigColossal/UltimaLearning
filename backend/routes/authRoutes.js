@@ -1,3 +1,27 @@
+import express from "express";
+import passport from "passport";
+import {
+  register,
+  login,
+  refreshToken,
+  logout,
+  getCurrentUser,
+} from "../controllers/authController.js";
+import jwt from "jsonwebtoken";
+
+const router = express.Router();
+
+router.post("/register", register);
+router.post("/login", login);
+router.post("/refresh", refreshToken);
+router.post("/logout", logout);
+router.get("/me", getCurrentUser);
+
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] }),
+);
+
 router.get(
   "/google/callback",
   passport.authenticate("google", {
@@ -26,3 +50,5 @@ router.get(
     res.redirect(`/oauth-success?token=${accessToken}&userId=${req.user._id}`);
   },
 );
+
+export default router;
