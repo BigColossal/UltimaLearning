@@ -4,7 +4,7 @@
   "description": "A full-featured MERN stack web application for creating and following structured learning roadmaps with gamified XP and level tracking.",
   "main": "index.js",
   "scripts": {
-    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "build": "npm install . && npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
     "start": "npm run start --prefix backend"
   },
   "repository": {
