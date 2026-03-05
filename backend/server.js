@@ -23,9 +23,18 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+app.set("trust proxy", 1);
 app.use(cookieParser());
 app.use(passport.initialize());
-app.use(cors());
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === "production"
+        ? true
+        : ["http://localhost:3000", "http://localhost:5000"],
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 // Routes
@@ -40,13 +49,13 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "OK", message: "UltimaLearning API is running" });
 });
 
-// Serve static files from the React app build directory
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-// Catch all handler: send back React's index.html file for any non-API routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
-});
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
+  });
+}
 
 // Connect to MongoDB
 mongoose
