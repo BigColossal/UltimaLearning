@@ -43,13 +43,19 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
+
         connectSrc: [
           "'self'",
           "http://localhost:5000",
           "http://localhost:3000",
         ],
+
         scriptSrc: ["'self'", "'unsafe-inline'"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
+
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+
+        fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
+
         imgSrc: ["'self'", "data:"],
       },
     },
