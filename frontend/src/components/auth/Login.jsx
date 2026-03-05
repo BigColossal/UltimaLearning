@@ -15,7 +15,6 @@ const Login = ({ switchToRegister }) => {
 
     try {
       const data = await login(email, password); // now this actually resolves to the backend data
-      console.log("Logged in!", data);
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || err.message || "Login failed");

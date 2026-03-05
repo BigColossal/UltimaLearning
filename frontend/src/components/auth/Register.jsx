@@ -16,7 +16,6 @@ const Register = ({ switchToLogin }) => {
 
     try {
       const data = await register(username, email, password);
-      console.log("Registered! Access Token:", data.accessToken);
       // You can redirect or show a success message here
     } catch (err) {
       setError(err.message);
