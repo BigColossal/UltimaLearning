@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
-import "../styles/Auth.css";
+import "../styles/auth.css";
 
 const AuthPage = () => {
   const [mode, setMode] = useState("login");
