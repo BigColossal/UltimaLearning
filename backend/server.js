@@ -3,6 +3,8 @@ import "./config/dotenv.js";
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import skillRoutes from "./routes/skillRoutes.js";
 import domainRoutes from "./routes/domainRoutes.js";
 import subskillRoutes from "./routes/subskillRoutes.js";
@@ -13,6 +15,9 @@ import passport from "passport";
 import "./config/passport.js";
 import authRoutes from "./routes/authRoutes.js";
 import { protect } from "./middleware/authMiddleware.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -33,6 +38,14 @@ app.use("/api/subskills", protect, subskillRoutes);
 // Health check
 app.get("/api/health", (req, res) => {
   res.json({ status: "OK", message: "UltimaLearning API is running" });
+});
+
+// Serve static files from the React app build directory
+app.use(express.static(path.join(__dirname, "dist")));
+
+// Catch all handler: send back React's index.html file for any non-API routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 // Connect to MongoDB
