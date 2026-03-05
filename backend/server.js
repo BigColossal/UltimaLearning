@@ -25,7 +25,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const limiter = rateLimit({
-  windowMs: 5 * 60 * 1000, // 15 min
+  windowMs: 5 * 60 * 1000, // 5 min
   max: 100, // 100 requests per IP
   standardHeaders: true,
   legacyHeaders: false,

@@ -117,7 +117,7 @@ Generate a test with EXACTLY 10 questions structured as follows:
 - 2 Written Answer / Analysis Questions (50 XP each)
 - 2 Multiple Choice Questions (25 XP each)
 
-Total Questions: 10
+Total Questions: 10 - 50 (Fully dependent on amount of subskills listed. If amount of subskills is lesser or equal to 10, do 10. From there onwards, you may increase.)
 Total Possible XP: 800 XP
 
 STRICT REQUIREMENTS:
@@ -130,6 +130,8 @@ STRICT REQUIREMENTS:
 - Exercises must require application, not memorization.
 - Multiple choice questions must include plausible distractors.
 - Do NOT include answers or solutions.
+- Questions must not repeat the same concept in slightly different wording.
+- Each question should test a different aspect of the subskill.
 
 Formatting Requirements:
 - Clearly label each question as:
