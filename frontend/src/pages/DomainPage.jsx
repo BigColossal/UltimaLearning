@@ -142,7 +142,8 @@ After the project description, include an XP BREAKDOWN TABLE:
 - XP Earned (leave blank)
 
 XP RULES:
-- Total XP available for the project should equal **500 XP**.
+- Each subskill used should have atleast 500 exp available.
+- Upper limit for a subskill is 1500. This depends heavily on how much and how in depth its used within the project.
 - Higher-level subskills should have higher XP allocations.
 - Lower-level subskills should have smaller XP allocations.
 - XP should be distributed logically based on project difficulty.
@@ -150,14 +151,14 @@ XP RULES:
 Example table format:
 
 Subskill | XP Available | XP Earned
-HTML Document Structure | 40 | 
-DOM Tree Representation | 60 | 
-Attributes and Attribute Parsing | 50 | 
+HTML Document Structure | 500 | 
+DOM Tree Representation | 1000 | 
+Attributes and Attribute Parsing | 500 | 
 ... | ... | ...
 
 At the bottom include:
 
-Total XP Possible: 500
+Total XP Possible: [total exp available]
 
 Do NOT provide solutions.
 Only generate the project.
@@ -188,17 +189,18 @@ Level Meaning:
 61–80 = Advanced
 81–100 = Expert
 
-
 Generate EXACTLY 10 practical coding / technical exercises.
 
 STRICT REQUIREMENTS:
-- Exercises must require solving problems or implementing logic.
-- No multiple choice questions.
-- No written theory questions.
-- No definition questions.
-- All exercises must involve applying the skill.
-- Difficulty must match the level of the subskill.
-- Every subskill must be tested at least once.
+
+* Exercises must require solving problems or implementing logic.
+* No multiple choice questions.
+* No written theory questions.
+* No definition questions.
+* All exercises must involve applying the skill.
+* Difficulty must match the level of the subskill.
+* Every subskill must be tested at least once.
+* Exercises should increase slightly in difficulty from 1 → 10.
 
 Formatting:
 
@@ -212,33 +214,49 @@ Problem description
 
 Subskills tested: ___
 
+(Continue until Exercise 10)
+
 There must be EXACTLY 10 exercises.
-Every subskill listed must be tested at least once across the exercises.
-Exercises should increase slightly in difficulty from 1 → 10.
 
 After the exercises, include an XP SUMMARY TABLE with:
 
-- Exercise Number
-- XP Available
-- XP Earned (leave blank for grading)
+* Exercise Number
+* XP Available
+* XP Earned (leave blank for grading)
 
 Example:
 
 Exercise | XP Available | XP Earned
-1 | 50 | 
-2 | 50 | 
-3 | 50 | 
-4 | 75 | 
-5 | 75 | 
-6 | 75 | 
-7 | 75 | 
-8 | 100 | 
-9 | 100 | 
-10 | 100 | 
+1 | 200 |
+2 | 200 |
+3 | 200 |
+4 | 300 |
+5 | 300 |
+6 | 300 |
+7 | 300 |
+8 | 400 |
+9 | 400 |
+10 | 500 |
+
+After the XP SUMMARY TABLE, include a SUBSKILL XP TABLE.
+
+Rules for the SUBSKILL XP TABLE:
+
+* List every subskill that appeared in the exercises.
+* If a subskill appears in an exercise, it receives the FULL XP value of that exercise.
+* Do NOT divide or spread XP between subskills.
+* If a subskill appears in multiple exercises, its XP should accumulate from each exercise.
+
+Example:
+
+Subskill | XP Earned
+1.1 HTML Document Structure |
+1.2 Browser HTML Parsing Process |
+1.3 DOM Tree Representation |
+1.4 Elements and Tag Syntax |
 
 Do NOT include solutions.
-Only generate the exercises.
-`;
+Only generate the exercises and the two tables.`;
 
       navigator.clipboard.writeText(prompt);
       alert("Exercise prompt copied to clipboard!");
