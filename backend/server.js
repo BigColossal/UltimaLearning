@@ -25,15 +25,15 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const limiter = rateLimit({
-  windowMs: 5 * 60 * 1000, // 5 min
-  max: 100, // 100 requests per IP
+  windowMs: 3 * 60 * 1000, // 5 min
+  max: 200, // 100 requests per IP
   standardHeaders: true,
   legacyHeaders: false,
 });
 
 const authLimiter = rateLimit({
   windowMs: 5 * 60 * 1000,
-  max: 20, // 25 login attempts per 15 mins
+  max: 30, // 25 login attempts per 15 mins
 });
 
 // Middleware

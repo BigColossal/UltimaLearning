@@ -93,67 +93,155 @@ const DomainPage = () => {
     }
   };
 
-  const handleGenerateTestPrompt = () => {
+  const handleGenerateProjectPrompt = () => {
     if (domain.subskills && domain.subskills.length > 0) {
       const subskillNames = domain.subskills
         .map((s) => `${s.name}: Level ${s.level}. ${s.description}`)
         .join("\n\n");
-      const prompt = `
-You are generating a high-quality, rigorous test.
 
-The test must cover ALL of the following subskills, each with an associated level (1–100):
+      const prompt = `
+You are generating a high-quality PROJECT challenge.
+
+The project must cover ALL of the following subskills, each with an associated level (1–100):
+
 ${subskillNames}
 
 Level Meaning:
-0–20 = Beginner (basic understanding, foundational concepts)
-21–40 = Early Intermediate (guided application)
-41–60 = Intermediate (independent application, moderate complexity)
-61–80 = Advanced (multi-step reasoning, edge cases, abstraction)
-81–100 = Expert (deep understanding, synthesis, optimization, real-world complexity)
+0–20 = Beginner
+21–40 = Early Intermediate
+41–60 = Intermediate
+61–80 = Advanced
+81–100 = Expert
 
-Generate a test with EXACTLY 10 questions structured as follows:
-- 2 Project-Based Questions (200 XP each)
-- 4 Exercise / Problem-Solving Questions (100 XP each)
-- 2 Written Answer / Analysis Questions (50 XP each)
-- 2 Multiple Choice Questions (25 XP each)
-
-Total Questions: 10 - 50 (Fully dependent on amount of subskills listed. If amount of subskills is lesser or equal to 10, do 10. From there onwards, you may increase.)
-Total Possible XP: 800 XP
+Generate ONE substantial project that meaningfully tests these subskills.
 
 STRICT REQUIREMENTS:
-- EVERY subskill listed MUST be meaningfully tested at least once.
-- Difficulty of each question MUST match the subskill’s level.
-- Higher-level subskills must appear in more complex, multi-layered tasks.
-- Lower-level subskills should focus on fundamentals but still require thinking.
-- Avoid pure definition questions unless level is under 15.
-- Projects must require synthesis of multiple subskills.
-- Exercises must require application, not memorization.
-- Multiple choice questions must include plausible distractors.
+- The project must integrate MULTIPLE subskills together.
+- Difficulty must reflect the level of each subskill.
+- Higher level subskills must appear in deeper architecture or complex logic.
+- Lower level subskills should still be required but in simpler forms.
+- The project must require real problem solving and implementation.
+- Do NOT include any multiple choice, theory questions, or written analysis.
 - Do NOT include answers or solutions.
-- Questions must not repeat the same concept in slightly different wording.
-- Each question should test a different aspect of the subskill.
 
-Formatting Requirements:
-- Clearly label each question as:
-  - [Project – 200 XP]
-  - [Exercise – 100 XP]
-  - [Written – 50 XP]
-  - [Multiple Choice – 25 XP]
-- Clearly indicate which subskills are being tested in each question.
+Output format:
 
-After the 10 questions, include:
+Project Title
 
-1) An XP Breakdown Table:
-   - Each subskill
-   - XP available for that subskill
-   - XP earned (leave blank for grading system to fill)
+Project Description
+
+Project Requirements (clear bullet list)
+
+Subskills Being Tested:
+(list each subskill used)
+
+After the project description, include an XP BREAKDOWN TABLE:
+
+- Each subskill listed
+- XP Available for that subskill
+- XP Earned (leave blank)
+
+XP RULES:
+- Total XP available for the project should equal **500 XP**.
+- Higher-level subskills should have higher XP allocations.
+- Lower-level subskills should have smaller XP allocations.
+- XP should be distributed logically based on project difficulty.
+
+Example table format:
+
+Subskill | XP Available | XP Earned
+HTML Document Structure | 40 | 
+DOM Tree Representation | 60 | 
+Attributes and Attribute Parsing | 50 | 
+... | ... | ...
+
+At the bottom include:
+
+Total XP Possible: 500
 
 Do NOT provide solutions.
-Do NOT grade the test.
-Only generate the test and XP structure.
+Only generate the project.
 `;
+
       navigator.clipboard.writeText(prompt);
-      alert("Test prompt copied to clipboard!");
+      alert("Project prompt copied to clipboard!");
+    }
+  };
+
+  const handleGenerateExercisePrompt = () => {
+    if (domain.subskills && domain.subskills.length > 0) {
+      const subskillNames = domain.subskills
+        .map((s) => `${s.name}: Level ${s.level}. ${s.description}`)
+        .join("\n\n");
+
+      const prompt = `
+You are generating rigorous technical EXERCISES.
+
+The exercises must cover ALL of the following subskills, each with an associated level (1–100):
+
+${subskillNames}
+
+Level Meaning:
+0–20 = Beginner
+21–40 = Early Intermediate
+41–60 = Intermediate
+61–80 = Advanced
+81–100 = Expert
+
+
+Generate EXACTLY 10 practical coding / technical exercises.
+
+STRICT REQUIREMENTS:
+- Exercises must require solving problems or implementing logic.
+- No multiple choice questions.
+- No written theory questions.
+- No definition questions.
+- All exercises must involve applying the skill.
+- Difficulty must match the level of the subskill.
+- Every subskill must be tested at least once.
+
+Formatting:
+
+[Exercise 1]
+Problem description
+
+Subskills tested: ___
+
+[Exercise 2]
+Problem description
+
+Subskills tested: ___
+
+There must be EXACTLY 10 exercises.
+Every subskill listed must be tested at least once across the exercises.
+Exercises should increase slightly in difficulty from 1 → 10.
+
+After the exercises, include an XP SUMMARY TABLE with:
+
+- Exercise Number
+- XP Available
+- XP Earned (leave blank for grading)
+
+Example:
+
+Exercise | XP Available | XP Earned
+1 | 50 | 
+2 | 50 | 
+3 | 50 | 
+4 | 75 | 
+5 | 75 | 
+6 | 75 | 
+7 | 75 | 
+8 | 100 | 
+9 | 100 | 
+10 | 100 | 
+
+Do NOT include solutions.
+Only generate the exercises.
+`;
+
+      navigator.clipboard.writeText(prompt);
+      alert("Exercise prompt copied to clipboard!");
     }
   };
 
@@ -237,10 +325,18 @@ Only generate the test and XP structure.
         </button>
         <button
           className="btn btn-secondary"
-          onClick={handleGenerateTestPrompt}
+          onClick={handleGenerateProjectPrompt}
           disabled={!domain.subskills || domain.subskills.length === 0}
         >
-          🧪 Generate Test Prompt
+          🏗 Generate Project Prompt
+        </button>
+
+        <button
+          className="btn btn-secondary"
+          onClick={handleGenerateExercisePrompt}
+          disabled={!domain.subskills || domain.subskills.length === 0}
+        >
+          🧩 Generate Exercise Prompt
         </button>
       </div>
 
