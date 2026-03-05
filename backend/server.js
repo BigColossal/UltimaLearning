@@ -15,12 +15,26 @@ import passport from "passport";
 import "./config/passport.js";
 import authRoutes from "./routes/authRoutes.js";
 import { protect } from "./middleware/authMiddleware.js";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 15 min
+  max: 100, // 100 requests per IP
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const authLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 20, // 25 login attempts per 15 mins
+});
 
 // Middleware
 app.set("trust proxy", 1);
@@ -36,6 +50,9 @@ app.use(
   }),
 );
 app.use(express.json());
+app.use(helmet());
+app.use("/api", limiter);
+app.use("/api/auth/login", authLimiter);
 
 // Routes
 app.use("/api/auth", authRoutes);
