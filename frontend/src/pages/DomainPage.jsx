@@ -85,7 +85,9 @@ const DomainPage = () => {
 
   const handleCopyList = () => {
     if (domain.subskills && domain.subskills.length > 0) {
-      const subskillNames = domain.subskills.map((s) => s.name).join("\n");
+      const subskillNames = domain.subskills
+        .map((s) => `${s.name}: Level ${s.level}. ${s.description}`)
+        .join("\n");
       navigator.clipboard.writeText(subskillNames);
       alert("Subskill list copied to clipboard!");
     }
@@ -94,8 +96,8 @@ const DomainPage = () => {
   const handleGenerateTestPrompt = () => {
     if (domain.subskills && domain.subskills.length > 0) {
       const subskillNames = domain.subskills
-        .map((s) => `${s.name}: Level ${s.level}`)
-        .join(", ");
+        .map((s) => `${s.name}: Level ${s.level}. ${s.description}`)
+        .join("\n\n");
       const prompt = `
 You are generating a high-quality, rigorous test.
 

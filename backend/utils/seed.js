@@ -7,7 +7,7 @@ dotenv.config();
 
 // read json file
 const curriculum = JSON.parse(
-  fs.readFileSync(new URL("./jsCurriculum.json", import.meta.url)),
+  fs.readFileSync(new URL("./sqldesignRoadmap.json", import.meta.url)),
 );
 
 await mongoose.connect(process.env.MONGODB_URI);

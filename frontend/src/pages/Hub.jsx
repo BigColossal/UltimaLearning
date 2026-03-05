@@ -12,10 +12,20 @@ const Hub = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [formData, setFormData] = useState({ name: "", description: "" });
   const [deleteTarget, setDeleteTarget] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
   useEffect(() => {
     loadSkills();
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300); // 300ms delay
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
 
   const loadSkills = async () => {
     try {
@@ -80,18 +90,30 @@ const Hub = () => {
     }
   };
 
+  const filteredSkills = skillsWithDomains.filter((skill) =>
+    skill.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()),
+  );
+
   return (
     <div className="hub">
       <div className="hub-header">
         <h1>Learning Hub</h1>
         <p className="hub-subtitle">Manage your learning skills and roadmaps</p>
-
         <button
           className="btn btn-primary create-confirmation-btn"
           onClick={() => setShowCreateForm(!showCreateForm)}
         >
           {showCreateForm ? "Cancel" : "+ Create New Skill"}
         </button>
+        <div className="search-container">
+          <input
+            type="text"
+            className="form-input search-input"
+            placeholder="Search skills..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
       </div>
       {showCreateForm && (
         <div className="create-skill-form card">
@@ -132,9 +154,9 @@ const Hub = () => {
       )}
       {loading ? (
         <div className="loading">Loading skills...</div>
-      ) : skillsWithDomains.length > 0 ? (
+      ) : filteredSkills.length > 0 ? (
         <div className="skills-grid">
-          {skillsWithDomains.map((skill, index) => (
+          {filteredSkills.map((skill, index) => (
             <div
               key={skill._id}
               className="skill-card-wrapper"
@@ -152,6 +174,11 @@ const Hub = () => {
               </div>
             </div>
           ))}
+        </div>
+      ) : searchTerm ? (
+        <div className="empty-state">
+          <h2>No matching skills</h2>
+          <p>Try a different search term.</p>
         </div>
       ) : (
         <div className="empty-state">

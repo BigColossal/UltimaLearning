@@ -1,7 +1,7 @@
 import fs from "fs";
 
-const filePath = "./jsCurriculum.json"; // your input file
-const outputPath = "./jsCurriculum.json";
+const filePath = "./sqldesignRoadmap.json"; // your input file
+const outputPath = "./sqldesignRoadmap.json";
 
 const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 

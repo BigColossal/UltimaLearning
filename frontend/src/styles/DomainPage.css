@@ -1,34 +1,52 @@
 .domain-page {
   width: 100%;
-  max-width: 100%;
-  margin: 0;
+  max-width: 85vw;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 10rem;
+  animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .domain-page-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 2rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border-color);
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .domain-page-header h1 {
-  font-size: 2.25rem;
+  font-size: 2.75rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  line-height: 1.1;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .domain-description {
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: 1.05rem;
+  max-width: 650px;
+  line-height: 1.6;
 }
 
 .domain-actions {
@@ -46,27 +64,32 @@
 .domain-utility-buttons {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
   flex-wrap: wrap;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  background: var(--card-bg, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(6px);
 }
 
 .subskills-section {
-  margin-top: 1.5rem;
+  margin-top: 3rem;
 }
 
 .subskills-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.75rem;
   flex-wrap: wrap;
   gap: 1rem;
 }
 
 .subskills-header h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .create-subskill-form {
@@ -82,24 +105,36 @@
 
 .subskills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.back-button-wrapper {
+  margin-bottom: 2rem;
+}
+
+.back-button-wrapper .btn {
+  opacity: 0.9;
+}
+
+.back-button-wrapper .btn:hover {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
   .domain-page-header {
     flex-direction: column;
   }
-  
+
   .domain-actions {
     width: 100%;
   }
-  
+
   .subskills-header {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .subskills-grid {
     grid-template-columns: 1fr;
   }

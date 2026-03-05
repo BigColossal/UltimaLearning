@@ -86,12 +86,12 @@ const SubskillPage = () => {
 
   return (
     <div className="subskill-page">
+      <div className="back-button-wrapper">
+        <button className="btn btn-danger" onClick={() => navigate(-1)}>
+          Back to Domain Page
+        </button>
+      </div>
       <div className="subskill-page-header">
-        <div className="back-button-wrapper">
-          <button className="btn btn-danger" onClick={() => navigate(-1)}>
-            Back to Domain Page
-          </button>
-        </div>
         {editing ? (
           <form onSubmit={handleUpdateSubskill} className="subskill-edit-form">
             <input
@@ -127,6 +127,9 @@ const SubskillPage = () => {
           <>
             <div>
               <h1>{subskill.name}</h1>
+              <span className={`tier-badge ${tierClass}`}>
+                {tier} • Level {subskill.level}
+              </span>
               <p className="subskill-description">
                 {subskill.description || "No description"}
               </p>

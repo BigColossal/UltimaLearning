@@ -5,7 +5,7 @@
 .hub {
   min-height: 100vh;
   padding: 3rem 2rem 5rem 2rem;
-  max-width: 1400px;
+  max-width: 90%;
   margin: 0 auto;
   position: relative;
 }
@@ -14,11 +14,11 @@
 .hub::before {
   content: "";
   position: absolute;
-  top: -200px;
+  top: -20%;
   left: 50%;
   transform: translateX(-50%);
-  width: 800px;
-  height: 800px;
+  width: 50vw;
+  height: 50vh;
   background: radial-gradient(
     circle,
     rgba(255, 120, 80, 0.05),
@@ -145,18 +145,18 @@
 
 .skills-grid {
   /* Masonry using columns */
-  column-width: 340px; /* minimum card width */
+  column-width: 20vw; /* minimum card width */
   column-gap: 2.5rem; /* space between columns */
 
   /* Optional for stacking nicely on small screens */
   width: 100%;
-  max-width: 1400px;
+  max-width: 85vw;
   margin: 0 auto;
 }
 
 .skill-card-wrapper {
   /* Needed for columns to work properly */
-  display: inline-block;
+  display: grid;
   width: 100%;
   margin-bottom: 4rem; /* vertical spacing between cards */
 
@@ -260,4 +260,13 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.search-container {
+  width: 50%;
+  margin: 0 auto; /* centers horizontally */
+}
+
+.search-input {
+  width: 100%;
 }
