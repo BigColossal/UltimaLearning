@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "cd ../frontend && npm install && npm run build && cd ../backend && cp -r ../frontend/dist .",
+    "build": "cd ../frontend && npm install && npm run build",
     "dev": "nodemon server.js"
   },
   "keywords": [],
