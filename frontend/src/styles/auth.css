@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
   background: radial-gradient(circle at top left, #1b0c0c, #0d0404);
   font-family: "Poppins", sans-serif;
 }
@@ -15,16 +16,22 @@
 =========================== */
 .auth-card {
   background: rgba(14, 7, 7, 0.9);
-  padding: 3rem 2.5rem;
+  padding: 2.5rem;
   border-radius: 2rem;
-  width: 420px;
+
+  width: 100%;
+  max-width: 26rem;
+
   box-shadow:
-    0 0 20px rgba(18, 13, 10, 0.4),
-    0 20px 40px rgba(0, 0, 0, 0.6);
+    0 0 1.25rem rgba(18, 13, 10, 0.4),
+    0 1.5rem 2.5rem rgba(0, 0, 0, 0.6);
+
   border: 1px solid rgba(77, 2, 2, 0.2);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0.6rem);
+
   position: relative;
   overflow: hidden;
+
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
@@ -35,78 +42,74 @@
   position: absolute;
   top: -50%;
   left: -50%;
+
   width: 200%;
   height: 200%;
+
   background: radial-gradient(circle, rgba(11, 10, 10, 0.15), transparent 70%);
   animation: glowRotate 8s linear infinite;
+
   pointer-events: none;
   z-index: 0;
 }
 
 @keyframes glowRotate {
-  0% {
+  from {
     transform: rotate(0deg);
   }
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }
 
 .auth-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-0.35rem);
   box-shadow:
-    0 0 30px rgba(49, 13, 13, 0.6),
-    0 25px 50px rgba(0, 0, 0, 0.7);
+    0 0 1.8rem rgba(49, 13, 13, 0.6),
+    0 1.8rem 3rem rgba(0, 0, 0, 0.7);
 }
 
 /* ===========================
    HEADINGS
 =========================== */
 .auth-card h1 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-size: clamp(1.6rem, 2vw, 2rem);
+  margin-bottom: 1.4rem;
   text-align: center;
+
   color: #ff8a5c;
-  text-shadow: 0 0 10px rgba(255, 115, 0, 0.6);
-  z-index: 1;
+  text-shadow: 0 0 0.6rem rgba(255, 115, 0, 0.6);
+
   position: relative;
+  z-index: 1;
 }
 
 /* ===========================
    INPUTS
 =========================== */
-/* ===========================
-   INPUTS (FIX AUTOCOMPLETE)
-=========================== */
 .auth-input {
   width: 100%;
-  padding: 1rem 1.2rem;
-  margin-bottom: 1.2rem;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1rem;
+
   background: rgba(20, 10, 10, 0.6);
   border: 1px solid rgba(255, 115, 0, 0.3);
-  border-radius: 1rem;
+  border-radius: 0.9rem;
+
   color: #fff;
   font-size: 0.95rem;
-  backdrop-filter: blur(6px);
-  transition: all 0.3s ease;
+
+  backdrop-filter: blur(0.4rem);
+  transition: all 0.25s ease;
+
   position: relative;
   z-index: 1;
-}
-
-/* Keep input text color for autofill (Chrome, Safari) */
-input.auth-input:-webkit-autofill,
-input.auth-input:-webkit-autofill:hover,
-input.auth-input:-webkit-autofill:focus,
-input.auth-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0px 1000px rgba(20, 10, 10, 0.6) inset;
-  -webkit-text-fill-color: #fff;
-  transition: background-color 5000s ease-in-out 0s;
 }
 
 .auth-input:focus {
   outline: none;
   border-color: #ff7300;
-  box-shadow: 0 0 10px rgba(255, 115, 0, 0.5);
+  box-shadow: 0 0 0.6rem rgba(255, 115, 0, 0.5);
 }
 
 /* ===========================
@@ -114,54 +117,58 @@ input.auth-input:-webkit-autofill:active {
 =========================== */
 .auth-error {
   color: #ff4d4d;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
   font-size: 0.9rem;
   text-align: center;
-  text-shadow: 0 0 5px rgba(255, 77, 77, 0.6);
+  text-shadow: 0 0 0.3rem rgba(255, 77, 77, 0.6);
 }
 
 /* ===========================
    BUTTONS
 =========================== */
-.auth.card .btn,
-.auth-switch-btn {
+.auth-card .btn-primary {
+  width: 100%;
+  padding: 0.95rem;
+
+  border-radius: 999rem;
+
+  background: linear-gradient(135deg, #ff3c00, #ff7300);
+  color: white;
+
+  font-size: 1rem;
   font-weight: 600;
-  cursor: pointer;
-  border: none;
+
+  text-shadow: 0 0 0.3rem rgba(255, 115, 0, 0.7);
+
+  box-shadow: 0 0.3rem 1rem rgba(255, 115, 0, 0.5);
+
   transition: all 0.25s ease;
 }
 
-.auth.card .btn-primary {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #ff3c00, #ff7300);
-  color: white;
-  font-size: 1rem;
-  text-shadow: 0 0 5px rgba(255, 115, 0, 0.7);
-  box-shadow: 0 4px 15px rgba(255, 115, 0, 0.5);
-}
-
 .auth-card .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(255, 115, 0, 0.7);
+  transform: translateY(-0.15rem);
+  box-shadow: 0 0.4rem 1.2rem rgba(255, 115, 0, 0.7);
 }
 
-.auth-card .auth-switch-btn {
+.auth-switch-btn {
   background: transparent;
   border: 1px solid rgba(255, 115, 0, 0.4);
-  padding: 0.6rem 1.2rem;
-  border-radius: 999px;
+
+  padding: 0.5rem 1.1rem;
+  border-radius: 999rem;
+
   color: #ff8a5c;
   font-weight: 500;
+
   margin-top: 0.5rem;
   display: inline-block;
+
+  transition: all 0.25s ease;
 }
 
-.auth-card .auth-switch-btn:hover {
+.auth-switch-btn:hover {
   background: rgba(255, 115, 0, 0.15);
-  transform: translateY(-2px);
-  border-color: rgba(255, 115, 0, 0.7);
+  transform: translateY(-0.12rem);
 }
 
 /* ===========================
@@ -169,42 +176,48 @@ input.auth-input:-webkit-autofill:active {
 =========================== */
 .google-btn {
   display: block;
+
   margin-top: 1rem;
-  padding: 0.9rem;
+  padding: 0.8rem;
+
   text-align: center;
-  border-radius: 1rem;
+  border-radius: 0.9rem;
+
   background: linear-gradient(90deg, #ff3c00, #ff7300);
+
   color: white;
   font-weight: 600;
+
   text-decoration: none;
-  box-shadow: 0 4px 10px rgba(255, 115, 0, 0.5);
+
+  box-shadow: 0 0.25rem 0.8rem rgba(255, 115, 0, 0.5);
   transition: all 0.25s ease;
 }
 
 .google-btn:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
-  box-shadow: 0 6px 15px rgba(255, 115, 0, 0.6);
+  transform: translateY(-0.12rem);
+  box-shadow: 0 0.35rem 1rem rgba(255, 115, 0, 0.6);
 }
 
 /* ===========================
    TOGGLE / DIVIDER
 =========================== */
 .auth-toggle {
-  margin-top: 1.8rem;
+  margin-top: 1.6rem;
   text-align: center;
 }
 
 .auth-toggle p {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   color: #aaa;
   font-size: 0.9rem;
 }
 
-.auth-card .divider {
-  margin: 1.5rem 0;
+.divider {
+  margin: 1.3rem 0;
   text-align: center;
   font-size: 0.8rem;
+
   color: rgba(255, 255, 255, 0.4);
   position: relative;
 }
@@ -214,16 +227,17 @@ input.auth-input:-webkit-autofill:active {
   content: "";
   position: absolute;
   top: 50%;
+
   width: 40%;
-  height: 1px;
+  height: 0.06rem;
+
   background: rgba(255, 115, 0, 0.3);
 }
 
-.auth-page .divider::before {
+.divider::before {
   left: 0;
 }
-
-.auth-page .divider::after {
+.divider::after {
   right: 0;
 }
 
@@ -231,16 +245,74 @@ input.auth-input:-webkit-autofill:active {
    ANIMATION
 =========================== */
 .fade-in {
-  animation: AuthCardfadeIn 0.3s ease forwards;
+  animation: AuthCardfadeIn 0.35s ease forwards;
 }
 
 @keyframes AuthCardfadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(0.5rem);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .auth-card {
+    max-width: 24rem;
+    padding: 2.2rem;
+  }
+
+  .auth-card h1 {
+    font-size: 1.7rem;
+  }
+}
+
+/* Small tablets */
+@media (max-width: 640px) {
+  .auth-page {
+    padding: 1.5rem;
+  }
+
+  .auth-card {
+    padding: 2rem;
+    border-radius: 1.6rem;
+  }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.7rem;
+  }
+
+  .auth-card h1 {
+    font-size: 1.5rem;
+  }
+
+  .auth-input {
+    font-size: 0.9rem;
+  }
+
+  .btn-primary {
+    font-size: 0.95rem;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .auth-card {
+    padding: 1.5rem;
+  }
+
+  .auth-card h1 {
+    font-size: 1.35rem;
   }
 }

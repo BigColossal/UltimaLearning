@@ -4,8 +4,8 @@
 
 .hub {
   min-height: 100vh;
-  padding: 3rem 2rem 5rem 2rem;
-  max-width: 90%;
+  padding: 3rem 2rem 5rem;
+  max-width: 90rem;
   margin: 0 auto;
   position: relative;
 }
@@ -19,11 +19,13 @@
   transform: translateX(-50%);
   width: 50vw;
   height: 50vh;
+
   background: radial-gradient(
     circle,
     rgba(255, 120, 80, 0.05),
     transparent 60%
   );
+
   pointer-events: none;
   z-index: 0;
 }
@@ -36,9 +38,10 @@
   position: sticky;
   top: 4rem;
   z-index: 90;
+
   border-radius: 1.25rem;
 
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(1rem);
   background: linear-gradient(
     to bottom,
     rgba(20, 20, 20, 0.85),
@@ -53,11 +56,11 @@
   flex-wrap: wrap;
   gap: 1.5rem;
 
-  padding: 1.75rem clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1.2rem, 2vw, 1.75rem) clamp(1.5rem, 4vw, 3rem);
   margin-bottom: 2.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 
-  overflow: hidden; /* important for rounded blur edges */
+  box-shadow: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.8);
+  overflow: hidden;
 }
 
 .hub-header::after {
@@ -66,7 +69,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 2px;
+  height: 0.12rem;
 
   background: linear-gradient(
     90deg,
@@ -80,7 +83,7 @@
 }
 
 .hub-header h1 {
-  font-size: 2.6rem;
+  font-size: clamp(2rem, 3vw, 2.6rem);
   font-weight: 900;
 
   background: linear-gradient(
@@ -91,7 +94,6 @@
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
 
   letter-spacing: -0.04em;
   line-height: 1.1;
@@ -99,8 +101,8 @@
 
 .hub-subtitle {
   color: var(--text-secondary);
-  margin-top: 0.6rem;
-  font-size: 0.95rem;
+  margin-top: 0.4rem;
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
   opacity: 0.85;
 }
 
@@ -109,69 +111,57 @@
 ========================================= */
 
 .create-skill-form {
-  max-width: 650px;
-  margin: 0 auto 3rem auto;
-  padding: 2rem 2.25rem;
+  max-width: 40rem;
+  margin: 0 auto 3rem;
+  padding: 2rem 2.2rem;
 
-  border-radius: 1.75rem;
+  border-radius: 1.6rem;
+
   background: var(--card-bg);
   border: 2px solid var(--border-color);
 
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0.8rem 1.8rem rgba(0, 0, 0, 0.08);
 
   transition: all 0.3s ease;
 }
 
 .create-skill-form:hover {
   border-color: var(--primary-color);
+
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.12),
-    0 0 20px rgba(241, 99, 99, 0.08);
+    0 1.2rem 2.5rem rgba(0, 0, 0, 0.12),
+    0 0 1.2rem rgba(241, 99, 99, 0.08);
 }
 
 .create-skill-form h2 {
-  font-size: 1.6rem;
+  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
   font-weight: 700;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.6rem;
 }
-
-/* =========================================
-   GRID LAYOUT
-========================================= */
 
 /* =========================================
    MASONRY SKILL GRID
 ========================================= */
 
 .skills-grid {
-  /* Masonry using columns */
-  column-width: 20vw; /* minimum card width */
-  column-gap: 2.5rem; /* space between columns */
+  column-count: 3;
+  column-gap: clamp(1rem, 2vw, 1.6rem);
 
-  /* Optional for stacking nicely on small screens */
   width: 100%;
-  max-width: 85vw;
+  max-width: 85rem;
   margin: 0 auto;
 }
 
 .skill-card-wrapper {
-  /* Needed for columns to work properly */
-  display: grid;
-  width: 100%;
-  margin-bottom: 4rem; /* vertical spacing between cards */
+  break-inside: avoid;
+  margin-bottom: clamp(1rem, 2vw, 1.6rem);
 
-  /* Keep previous hover/flex styles */
-  flex-direction: column;
-  gap: 1rem;
-  transition: transform 0.3s ease;
+  display: inline-block;
+  width: 100%;
 }
 
-/* =========================================
-   CARD WRAPPER
-========================================= */
-
 .skill-card-wrapper:hover {
-  transform: translateY(-4px);
+  transform: translateY(-0.25rem);
 }
 
 /* =========================================
@@ -180,10 +170,12 @@
 
 .skill-card-actions-hub {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.8rem;
+  right: 0.8rem;
+
   opacity: 0;
-  transform: translateY(-6px);
+  transform: translateY(-0.4rem);
+
   transition: all 0.25s ease;
 }
 
@@ -197,14 +189,14 @@
 ========================================= */
 
 .empty-state {
-  margin-top: 5rem;
+  margin-top: 4rem;
   text-align: center;
   opacity: 0.9;
 }
 
 .empty-state h2 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  margin-bottom: 0.4rem;
 }
 
 .empty-state p {
@@ -216,33 +208,23 @@
 ========================================= */
 
 .loading {
-  margin-top: 4rem;
+  margin-top: 3rem;
   text-align: center;
   font-weight: 600;
   color: var(--text-secondary);
 }
 
 /* =========================================
-   RESPONSIVE
+   SEARCH
 ========================================= */
 
-@media (max-width: 768px) {
-  .hub {
-    padding: 2rem 1.25rem 4rem 1.25rem;
-  }
+.search-container {
+  width: clamp(16rem, 40%, 32rem);
+  margin: 0 auto;
+}
 
-  .hub-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .hub-header h1 {
-    font-size: 2rem;
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
+.search-input {
+  width: 100%;
 }
 
 /* =========================================
@@ -251,7 +233,7 @@
 
 .skill-card-wrapper {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(1.8rem);
   animation: cardFadeIn 0.6s ease forwards;
 }
 
@@ -262,11 +244,75 @@
   }
 }
 
-.search-container {
-  width: 50%;
-  margin: 0 auto; /* centers horizontally */
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+/* Ultra Wide Screens */
+@media (min-width: 1600px) {
+  .skills-grid {
+    column-count: 4;
+  }
 }
 
-.search-input {
-  width: 100%;
+/* Large Desktop */
+@media (max-width: 1399px) {
+  .skills-grid {
+    column-count: 3;
+  }
+}
+
+/* Small Desktop */
+@media (max-width: 1100px) {
+  .skills-grid {
+    column-count: 2;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .hub {
+    padding: 2rem 1.2rem 3rem;
+  }
+
+  .hub-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .skills-grid {
+    column-count: 2;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .hub {
+    padding: 1.6rem 1rem 2.5rem;
+  }
+
+  .skills-grid {
+    column-count: 1;
+  }
+
+  .hub-header h1 {
+    font-size: 1.7rem;
+  }
+
+  .create-skill-form {
+    padding: 1.4rem;
+  }
+
+  .empty-state h2 {
+    font-size: 1.4rem;
+  }
 }
