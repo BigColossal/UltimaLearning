@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const subskillSchema = new mongoose.Schema({
   name: {
@@ -8,11 +8,11 @@ const subskillSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    default: '',
+    default: "",
   },
   domainId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Domain',
+    ref: "Domain",
     required: true,
   },
   xp: {
@@ -24,7 +24,7 @@ const subskillSchema = new mongoose.Schema({
     type: Number,
     default: 0,
     min: 0,
-    max: 100,
+    max: 1000,
   },
   createdAt: {
     type: Date,
@@ -38,16 +38,15 @@ const subskillSchema = new mongoose.Schema({
 
 // Calculate level from XP (100 XP = 1 level, max level 100)
 subskillSchema.methods.updateLevel = function () {
-  const calculatedLevel = Math.floor(this.xp / 100);
-  this.level = Math.min(calculatedLevel, 100);
+  this.level = Math.floor(this.xp / 100);
 };
 
-subskillSchema.pre('save', function (next) {
+subskillSchema.pre("save", function (next) {
   this.updateLevel();
   this.updatedAt = Date.now();
   next();
 });
 
-const Subskill = mongoose.model('Subskill', subskillSchema);
+const Subskill = mongoose.model("Subskill", subskillSchema);
 
 export default Subskill;
