@@ -113,15 +113,18 @@ Level Meaning:
 61–80 = Advanced
 81–100 = Expert
 
+
 Generate ONE substantial project that meaningfully tests these subskills.
 
 STRICT REQUIREMENTS:
 - The project must integrate MULTIPLE subskills together.
 - Difficulty must reflect the level of each subskill.
-- Higher level subskills must appear in deeper architecture or complex logic.
-- Lower level subskills should still be required but in simpler forms.
+- Higher-level subskills must appear in deeper architecture or more complex implementation requirements.
+- Lower-level subskills should still be required but in simpler forms.
 - The project must require real problem solving and implementation.
-- Do NOT include any multiple choice, theory questions, or written analysis.
+- Do NOT include any multiple choice questions.
+- Do NOT include theory questions.
+- Do NOT include written analysis prompts.
 - Do NOT include answers or solutions.
 
 Output format:
@@ -133,36 +136,35 @@ Project Description
 Project Requirements (clear bullet list)
 
 Subskills Being Tested:
-(list each subskill used)
+(list EVERY subskill from the list above)
 
-After the project description, include an XP BREAKDOWN TABLE:
 
-- Each subskill listed
-- XP Available for that subskill
-- XP Earned (leave blank)
+After the project description, include an XP BREAKDOWN TABLE.
 
 XP RULES:
-- Each subskill used should have atleast 500 exp available.
-- Upper limit for a subskill is 1500. This depends heavily on how much and how in depth its used within the project.
-- Higher-level subskills should have higher XP allocations.
-- Lower-level subskills should have smaller XP allocations.
-- XP should be distributed logically based on project difficulty.
+- Every subskill listed must appear in the XP table.
+- Each subskill must have at least 150 XP available.
+- The maximum XP for a subskill is 400.
+- Higher-level subskills should receive more XP than lower-level subskills.
+- XP should reflect how heavily the subskill is used within the project.
+- If a subskill is central to the project architecture, it should receive higher XP.
+- If a subskill is only required in a limited way, it should receive lower XP.
 
-Example table format:
+Table format:
 
 Subskill | XP Available | XP Earned
-HTML Document Structure | 500 | 
-DOM Tree Representation | 1000 | 
-Attributes and Attribute Parsing | 500 | 
-... | ... | ...
+1.1 HTML Document Structure | ___ | 
+1.2 Browser HTML Parsing Process | ___ | 
+1.3 DOM Tree Representation | ___ | 
+...
 
 At the bottom include:
 
-Total XP Possible: [total exp available]
+Total XP Possible: [sum of all XP Available values]
 
 Do NOT provide solutions.
-Only generate the project.
-`;
+
+Only generate the project and the XP table.`;
 
       navigator.clipboard.writeText(prompt);
       alert("Project prompt copied to clipboard!");

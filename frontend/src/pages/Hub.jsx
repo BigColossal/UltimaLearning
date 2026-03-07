@@ -32,7 +32,7 @@ const Hub = () => {
       setLoading(true);
 
       await refreshSkills();
-      const updatedSkills = await getSkills("Jeremy");
+      const updatedSkills = await getSkills();
 
       const skillsData = await Promise.all(
         updatedSkills.data.map(async (skill) => {
